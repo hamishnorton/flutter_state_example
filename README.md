@@ -17,4 +17,6 @@ A very basic flutter app that shows various methods of state management
 ## ToDo
 
 1. Add focus / tab control
-
+2. Examples for validate on click of button, and then have validation active
+3. Focus to first field that is invalid after click on button
+4. Add unit testing
