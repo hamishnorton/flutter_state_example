@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_state_example/cubit/cubit_state_screen.dart';
-import 'package:flutter_state_example/cubit/form_cubit.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'riverpod/riverpod_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  // Form State && Cubit
+  //runApp(const MyApp());
 
+  // Provider
   // runApp(ChangeNotifierProvider(
   //     create: (_) => FormProvider(), child: const MyApp()));
+
+  // RiverPod
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,17 +26,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter State Examples',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        //home: const FormStateScreen(),
-        // home: ChangeNotifierProvider(
-        //     create: (_) => FormProvider(), child: const ProviderStateScreen()),
-        home: BlocProvider<FormCubit>(
-          create: (BuildContext context) => FormCubit(),
-          child: const CubitStateScreen(),
-        ));
+      title: 'Flutter State Examples',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+
+      // FormState
+      //home: const FormStateScreen(),
+
+      // Provider
+      // home: ChangeNotifierProvider(
+      //     create: (_) => FormProvider(), child: const ProviderStateScreen()),
+
+      // Cubit
+      // home: BlocProvider<FormCubit>(
+      //   create: (BuildContext context) => FormCubit(),
+      //   child: const CubitStateScreen(),
+      // ));
+
+      home: const RiverPodScreen(),
+    );
   }
 }
 

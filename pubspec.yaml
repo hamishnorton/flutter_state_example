@@ -38,6 +38,9 @@ dependencies:
   provider: ^6.0.2
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
+  flutter_hooks: ^0.18.0
+  hooks_riverpod: ^2.0.0-dev.4
+
 
 
 dev_dependencies:

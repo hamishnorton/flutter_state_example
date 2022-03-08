@@ -99,7 +99,6 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
               BlocBuilder<FormCubit, CubitFormState>(
                 buildWhen: (p, c) => (c.isValid != p.isValid),
                 builder: (context, state) {
-                  print('isValid Changed');
                   return ElevatedButton(
                     onPressed: (state.isValid)
                         ? () {
