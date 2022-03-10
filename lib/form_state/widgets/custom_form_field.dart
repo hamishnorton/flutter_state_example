@@ -9,12 +9,15 @@ class CustomFormField extends StatelessWidget {
     this.validator,
     this.keyboardType = TextInputType.text,
     this.controller,
+    this.validationEnabled = true,
   }) : super(key: key);
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final String hintText;
   final List<TextInputFormatter>? inputFormatters;
+  final bool validationEnabled;
   final String? Function(String?)? validator;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,8 +25,15 @@ class CustomFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         inputFormatters: inputFormatters,
-        validator: validator,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          if (validator == null) return null;
+          if (!validationEnabled) return null;
+
+          return validator!(value);
+        },
+        autovalidateMode: (validationEnabled)
+            ? AutovalidateMode.always
+            : AutovalidateMode.disabled,
         decoration: InputDecoration(hintText: hintText),
       ),
     );

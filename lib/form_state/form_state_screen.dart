@@ -7,8 +7,7 @@ class FormStateScreen extends StatefulWidget {
   const FormStateScreen({Key? key}) : super(key: key);
 
   // Validation on submit
-  // but uses autovalidate to provide validation as you type
-  // https://docs.flutter.dev/cookbook/forms/validation
+  // based on: https://docs.flutter.dev/cookbook/forms/validation
 
   @override
   State<FormStateScreen> createState() => _FormStateScreenState();
@@ -16,7 +15,11 @@ class FormStateScreen extends StatefulWidget {
 
 class _FormStateScreenState extends State<FormStateScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isValidationOn = false;
 
   @override
   void initState() {
@@ -28,7 +31,10 @@ class _FormStateScreenState extends State<FormStateScreen> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -44,22 +50,27 @@ class _FormStateScreenState extends State<FormStateScreen> {
             child: Column(
               children: [
                 CustomFormField(
+                    controller: _nameController,
                     hintText: 'Name',
                     keyboardType: TextInputType.name,
+                    validationEnabled: _isValidationOn,
                     validator: (value) {
                       return Validator.isName(value);
                     }),
                 CustomFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
+                  validationEnabled: _isValidationOn,
                   validator: (value) {
                     return Validator.isEmail(value);
                   },
                   hintText: 'Email',
                 ),
                 CustomFormField(
+                  controller: _phoneController,
                   hintText: 'Phone',
                   keyboardType: TextInputType.phone,
+                  validationEnabled: _isValidationOn,
                   validator: (value) {
                     return Validator.isPhone(value);
                   },
@@ -71,11 +82,16 @@ class _FormStateScreenState extends State<FormStateScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    validator: (value) {
-                      return null;
-                    },
+                    controller: _passwordController,
+                    validator: _isValidationOn
+                        ? (value) {
+                            return Validator.isPassword(value);
+                          }
+                        : null,
                     obscureText: true,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: (_isValidationOn)
+                        ? AutovalidateMode.always
+                        : AutovalidateMode.disabled,
                     decoration: const InputDecoration(hintText: 'Password'),
                   ),
                 ),
@@ -95,9 +111,23 @@ class _FormStateScreenState extends State<FormStateScreen> {
                       // print('Phome: ${}');
                       // print('Password: ${}');
                       // print('File: ${}');
+
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                        SnackBar(
+                            content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text('Processing Data'),
+                            Text('Name: ${_nameController.text}'),
+                            Text('Email: ${_emailController.text}'),
+                            Text('Phone: ${_phoneController.text}'),
+                            Text('Password: ${_passwordController.text}'),
+                          ],
+                        )),
                       );
+                      setState(() {
+                        _isValidationOn = true;
+                      });
                     }
                   },
                   child: const Text('Submit'),
