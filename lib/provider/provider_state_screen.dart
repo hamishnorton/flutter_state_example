@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 class ProviderStateScreen extends StatefulWidget {
   const ProviderStateScreen({Key? key}) : super(key: key);
 
-  // Validation as you type
-  // https://blog.logrocket.com/flutter-form-validation-complete-guide/#input-validation-input-formatters
+  // Validation turns on after first submit
+  // based on: https://blog.logrocket.com/flutter-form-validation-complete-guide/#input-validation-input-formatters
 
   @override
   State<ProviderStateScreen> createState() => _ProviderStateScreenState();
@@ -32,7 +32,7 @@ class _ProviderStateScreenState extends State<ProviderStateScreen> {
     _formProvider = Provider.of<FormProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Provider State')),
+      appBar: AppBar(title: const Text('stateSystem: Provider')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -42,14 +42,14 @@ class _ProviderStateScreenState extends State<ProviderStateScreen> {
                 hintText: 'Name',
                 keyboardType: TextInputType.name,
                 initialValue: _formProvider.name.value ?? '',
-                onChanged: _formProvider.validateName,
+                onChanged: _formProvider.nameChanged,
                 errorText: _formProvider.name.error,
               ),
               ProviderField(
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'Email',
                 initialValue: _formProvider.email.value ?? '',
-                onChanged: _formProvider.validateEmail,
+                onChanged: _formProvider.emailChanged,
                 errorText: _formProvider.email.error,
               ),
               ProviderField(
@@ -60,7 +60,7 @@ class _ProviderStateScreenState extends State<ProviderStateScreen> {
                   FilteringTextInputFormatter.singleLineFormatter,
                   FilteringTextInputFormatter.allow(RegExp("[0-9]+"))
                 ],
-                onChanged: _formProvider.validatePhone,
+                onChanged: _formProvider.phoneChanged,
                 errorText: _formProvider.phone.error,
               ),
               Padding(
@@ -72,7 +72,7 @@ class _ProviderStateScreenState extends State<ProviderStateScreen> {
                   decoration: InputDecoration(
                       hintText: 'Password',
                       errorText: _formProvider.password.error),
-                  onChanged: _formProvider.validatePassword,
+                  onChanged: _formProvider.passwordChanged,
                   inputFormatters: [
                     FilteringTextInputFormatter.singleLineFormatter,
                   ],
@@ -82,7 +82,7 @@ class _ProviderStateScreenState extends State<ProviderStateScreen> {
                 builder: (context, model, child) {
                   return ElevatedButton(
                     onPressed: () {
-                      if (model.validate) {
+                      if (model.isValid) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content: Column(
