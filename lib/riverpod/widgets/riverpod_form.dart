@@ -29,7 +29,7 @@ class RiverPodForm extends ConsumerWidget {
               keyboardType: TextInputType.name,
               initialValue: name.value ?? '',
               onChanged: (value) =>
-                  ref.read(formStateProvider.notifier).nameValidated(value),
+                  ref.read(formStateProvider.notifier).nameChanged(value),
               errorText: name.error,
             );
           },
@@ -43,7 +43,7 @@ class RiverPodForm extends ConsumerWidget {
               hintText: 'Email',
               initialValue: email.value ?? '',
               onChanged: (value) =>
-                  ref.read(formStateProvider.notifier).emailValidated(value),
+                  ref.read(formStateProvider.notifier).emailChanged(value),
               errorText: email.error,
             );
           },
@@ -61,7 +61,7 @@ class RiverPodForm extends ConsumerWidget {
                 FilteringTextInputFormatter.allow(RegExp("[0-9]+"))
               ],
               onChanged: (value) =>
-                  ref.read(formStateProvider.notifier).phoneValidated(value),
+                  ref.read(formStateProvider.notifier).phoneChanged(value),
               errorText: phone.error,
             );
           },
@@ -78,9 +78,8 @@ class RiverPodForm extends ConsumerWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: 'Password', errorText: password.error),
-                onChanged: (value) => ref
-                    .read(formStateProvider.notifier)
-                    .passwordValidated(value),
+                onChanged: (value) =>
+                    ref.read(formStateProvider.notifier).passwordChanged(value),
                 inputFormatters: [
                   FilteringTextInputFormatter.singleLineFormatter,
                 ],
@@ -91,26 +90,28 @@ class RiverPodForm extends ConsumerWidget {
         Consumer(
           builder: (context, ref, child) {
             bool isValid =
-                ref.watch(formStateProvider.select((f) => f.isValid));
+                ref.watch(formStateProvider.select((f) => f.isValid ?? false));
             return ElevatedButton(
-              onPressed: (isValid)
-                  ? () {
-                      FormModel fm = ref.read(formStateProvider);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text('Processing Data'),
-                            Text('Name: ${fm.name.value}'),
-                            Text('Email: ${fm.email.value}'),
-                            Text('Phone: ${fm.phone.value}'),
-                            Text('Password: ${fm.password.value}'),
-                          ],
-                        )),
-                      );
-                    }
-                  : null,
+              onPressed: () {
+                ref.read(formStateProvider.notifier).validated();
+                FormModel fm = ref.read(formStateProvider);
+
+                if (!(fm.isValid ?? false)) return;
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('Processing Data'),
+                      Text('Name: ${fm.name.value}'),
+                      Text('Email: ${fm.email.value}'),
+                      Text('Phone: ${fm.phone.value}'),
+                      Text('Password: ${fm.password.value}'),
+                    ],
+                  )),
+                );
+              },
               child: const Text('Submit'),
             );
           },

@@ -7,28 +7,35 @@ class FormModel {
   final ValidationModel email;
   final ValidationModel phone;
   final ValidationModel password;
+  final bool validationEnabled;
 
-  const FormModel(this.name, this.email, this.phone, this.password);
+  const FormModel(
+      this.name, this.email, this.phone, this.password, this.validationEnabled);
 
-  get isValid =>
-      (name.isValid && email.isValid && phone.isValid && password.isValid);
+  bool? get isValid {
+    if (!validationEnabled) return null;
+    return (name.isValid && email.isValid && phone.isValid && password.isValid);
+  }
 
   FormModel.empty()
       : name = ValidationModel.empty(),
         email = ValidationModel.empty(),
         phone = ValidationModel.empty(),
-        password = ValidationModel.empty();
+        password = ValidationModel.empty(),
+        validationEnabled = false;
 
   FormModel copyWith(
       {ValidationModel? name,
       ValidationModel? email,
       ValidationModel? phone,
-      ValidationModel? password}) {
+      ValidationModel? password,
+      bool? validationEnabled}) {
     return FormModel(
       name ?? this.name,
       email ?? this.email,
       phone ?? this.phone,
       password ?? this.password,
+      validationEnabled ?? this.validationEnabled,
     );
   }
 }

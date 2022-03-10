@@ -23,7 +23,7 @@ class _RiverPodScreenState extends State<RiverPodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('RiverPod State')),
+      appBar: AppBar(title: const Text('stateSystem: RiverPod')),
       body: const SafeArea(
         child: Padding(padding: EdgeInsets.all(8.0), child: RiverPodForm()),
       ),
