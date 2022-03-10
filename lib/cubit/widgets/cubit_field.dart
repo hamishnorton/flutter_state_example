@@ -10,6 +10,7 @@ class CubitField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.onChanged,
     this.initialValue = '',
+    this.enableValidation = false,
   }) : super(key: key);
 
   final String? errorText;
@@ -18,6 +19,7 @@ class CubitField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType keyboardType;
   final Function(String?)? onChanged;
+  final bool enableValidation;
 
   @override
   Widget build(BuildContext context) {

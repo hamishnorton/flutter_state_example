@@ -25,7 +25,7 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cubit State')),
+      appBar: AppBar(title: const Text('stateSystem: Cubit')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -40,7 +40,7 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                     keyboardType: TextInputType.name,
                     initialValue: state.name.value ?? '',
                     onChanged: (value) =>
-                        context.read<FormCubit>().nameValidated(value),
+                        context.read<FormCubit>().nameChanged(value),
                     errorText: state.name.error,
                   );
                 },
@@ -53,13 +53,13 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                     hintText: 'Email',
                     initialValue: state.email.value ?? '',
                     onChanged: (value) =>
-                        context.read<FormCubit>().emailValidated(value),
+                        context.read<FormCubit>().emailChanged(value),
                     errorText: state.email.error,
                   );
                 },
               ),
               BlocBuilder<FormCubit, CubitFormState>(
-                buildWhen: (p, c) => (c.phone.value != p.phone.value),
+                buildWhen: (p, c) => (c.phone != p.phone),
                 builder: (context, state) {
                   return CubitField(
                     hintText: 'Phone',
@@ -70,25 +70,25 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                       FilteringTextInputFormatter.allow(RegExp("[0-9]+"))
                     ],
                     onChanged: (value) =>
-                        context.read<FormCubit>().phoneValidated(value),
+                        context.read<FormCubit>().phoneChanged(value),
                     errorText: state.phone.error,
                   );
                 },
               ),
               BlocBuilder<FormCubit, CubitFormState>(
-                buildWhen: (p, c) => (c.password.value != p.password.value),
+                buildWhen: (p, c) => (c.password != p.password),
                 builder: (context, state) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
-                      initialValue: state.password.value ?? '',
+                      initialValue: state.password.value,
                       // probably not a good practise with a password
                       obscureText: true,
                       decoration: InputDecoration(
                           hintText: 'Password',
                           errorText: state.password.error),
                       onChanged: (value) =>
-                          context.read<FormCubit>().passwordValidated(value),
+                          context.read<FormCubit>().passwordChanged(value),
                       inputFormatters: [
                         FilteringTextInputFormatter.singleLineFormatter,
                       ],
@@ -100,23 +100,27 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                 buildWhen: (p, c) => (c.isValid != p.isValid),
                 builder: (context, state) {
                   return ElevatedButton(
-                    onPressed: (state.isValid)
-                        ? () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text('Processing Data'),
-                                  Text('Name: ${state.name.value}'),
-                                  Text('Email: ${state.email.value}'),
-                                  Text('Phone: ${state.phone.value}'),
-                                  Text('Password: ${state.password.value}'),
-                                ],
-                              )),
-                            );
-                          }
-                        : null,
+                    onPressed: () {
+                      FormCubit formCubit = context.read<FormCubit>();
+                      formCubit.validated();
+                      CubitFormState readState = formCubit.state;
+
+                      if (!(readState.isValid ?? false)) return;
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text('Processing Data'),
+                            Text('Name: ${readState.name.value}'),
+                            Text('Email: ${readState.email.value}'),
+                            Text('Phone: ${readState.phone.value}'),
+                            Text('Password: ${readState.password.value}'),
+                          ],
+                        )),
+                      );
+                    },
                     child: const Text('Submit'),
                   );
                 },
