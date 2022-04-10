@@ -34,7 +34,9 @@ class CustomFormField extends StatelessWidget {
         autovalidateMode: (validationEnabled)
             ? AutovalidateMode.always
             : AutovalidateMode.disabled,
-        decoration: InputDecoration(hintText: hintText),
+        decoration: InputDecoration(
+          hintText: hintText,
+        ),
       ),
     );
   }

@@ -9,8 +9,10 @@ class FormCubit extends Cubit<CubitFormState> {
   FormCubit() : super(FormInitial());
 
   bool _isValidationOn = false;
+  // TODO: could I be using the state instead?
 
   // TODO: question: what would happen if we didn't allow null?
+  // TODO: Add .copyWith
 
   void nameChanged(String? name) {
     if (name == state.name.value) return; // 'Might' prevent a rebuild

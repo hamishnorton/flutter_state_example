@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_state_example/form_state/widgets/custom_form_field.dart';
-import 'package:flutter_state_example/validator.dart';
+import 'package:flutter_state_example/form_state/widgets/email_on_changed_field.dart';
+import 'package:flutter_state_example/form_state/widgets/email_value_listenable_field.dart';
 
 class FormStateScreen extends StatefulWidget {
   const FormStateScreen({Key? key}) : super(key: key);
@@ -19,7 +18,8 @@ class _FormStateScreenState extends State<FormStateScreen> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isValidationOn = false;
+  String _onChangedFieldValue = '';
+  bool _hasAttemptedSubmit = false;
 
   @override
   void initState() {
@@ -49,52 +49,84 @@ class _FormStateScreenState extends State<FormStateScreen> {
             key: _formKey,
             child: Column(
               children: [
-                CustomFormField(
-                    controller: _nameController,
-                    hintText: 'Name',
-                    keyboardType: TextInputType.name,
-                    validationEnabled: _isValidationOn,
-                    validator: (value) {
-                      return Validator.isName(value);
-                    }),
-                CustomFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validationEnabled: _isValidationOn,
-                  validator: (value) {
-                    return Validator.isEmail(value);
-                  },
-                  hintText: 'Email',
-                ),
-                CustomFormField(
-                  controller: _phoneController,
-                  hintText: 'Phone',
-                  keyboardType: TextInputType.phone,
-                  validationEnabled: _isValidationOn,
-                  validator: (value) {
-                    return Validator.isPhone(value);
-                  },
-                  inputFormatters: [
-                    FilteringTextInputFormatter.singleLineFormatter,
-                    FilteringTextInputFormatter.allow(RegExp("[0-9]+"))
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: _passwordController,
-                    validator: _isValidationOn
-                        ? (value) {
-                            return Validator.isPassword(value);
-                          }
-                        : null,
-                    obscureText: true,
-                    autovalidateMode: (_isValidationOn)
-                        ? AutovalidateMode.always
-                        : AutovalidateMode.disabled,
-                    decoration: const InputDecoration(hintText: 'Password'),
-                  ),
-                ),
+                // CustomFormField(
+                //     controller: _nameController,
+                //     hintText: 'Name',
+                //     keyboardType: TextInputType.name,
+                //     validationEnabled: _hasAttemptedSubmit,
+                //     validator: (value) {
+                //       return Validator.isName(value);
+                //     }),
+                // CustomFormField(
+                //   controller: _emailController,
+                //   keyboardType: TextInputType.emailAddress,
+                //   validationEnabled: _hasAttemptedSubmit,
+                //   validator: (value) {
+                //     return Validator.isEmail(value);
+                //   },
+                //   hintText: 'Email',
+                // ),
+                // ValueListenableField(
+                //   controller: _emailController,
+                //   label: 'ValueListenableField:Email',
+                //   validationEnabled: _hasAttemptedSubmit,
+                //   validator: (value) {
+                //     return Validator.isEmail(value);
+                //   },
+                // ),
+                // OnChangedField(
+                //   validationEnabled: _hasAttemptedSubmit,
+                //   validator: (value) {
+                //     return Validator.isEmail(value);
+                //   },
+                //   label: 'OnChangeField:Email',
+                //   onChanged: (String text) {
+                //     _onChangedFieldValue = text;
+                //   },
+                // ),
+                EmailValueListenableField(
+                    label: 'EmailValueListenableField',
+                    onChanged: (value) {
+                      // not typically what you'd want to do.
+                      _emailController.text = value;
+                    },
+                    validationEnabled: _hasAttemptedSubmit),
+                EmailOnChangedField(
+                    label: 'EmailOnChangedField',
+                    onChanged: (String text) {
+                      _onChangedFieldValue = text;
+                    },
+                    validationEnabled: _hasAttemptedSubmit),
+                // CustomFormField(
+                //   controller: _phoneController,
+                //   hintText: 'Phone',
+                //   keyboardType: TextInputType.phone,
+                //   validationEnabled: _hasAttemptedSubmit,
+                //   validator: (value) {
+                //     return Validator.isPhone(value);
+                //   },
+                //   inputFormatters: [
+                //     FilteringTextInputFormatter.singleLineFormatter,
+                //     FilteringTextInputFormatter.allow(RegExp("[0-9]+"))
+                //   ],
+                // ),
+
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: TextFormField(
+                //     controller: _passwordController,
+                //     validator: _hasAttemptedSubmit
+                //         ? (value) {
+                //             return Validator.isPassword(value);
+                //           }
+                //         : null,
+                //     obscureText: true,
+                //     autovalidateMode: (_hasAttemptedSubmit)
+                //         ? AutovalidateMode.always
+                //         : AutovalidateMode.disabled,
+                //     decoration: const InputDecoration(hintText: 'Password'),
+                //   ),
+                // ),
                 // CustomImageFormField(
                 //     validator: (value) {
                 //       if (value == null) return 'Pick a picture';
@@ -122,11 +154,12 @@ class _FormStateScreenState extends State<FormStateScreen> {
                             Text('Email: ${_emailController.text}'),
                             Text('Phone: ${_phoneController.text}'),
                             Text('Password: ${_passwordController.text}'),
+                            Text('OnChangedField: $_onChangedFieldValue'),
                           ],
                         )),
                       );
                       setState(() {
-                        _isValidationOn = true;
+                        _hasAttemptedSubmit = true;
                       });
                     }
                   },

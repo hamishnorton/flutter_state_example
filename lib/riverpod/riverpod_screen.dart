@@ -5,6 +5,7 @@ import 'widgets/riverpod_form.dart';
 class RiverPodScreen extends StatefulWidget {
   const RiverPodScreen({Key? key}) : super(key: key);
 
+  //todo: could this be stateless
   @override
   State<RiverPodScreen> createState() => _RiverPodScreenState();
 }

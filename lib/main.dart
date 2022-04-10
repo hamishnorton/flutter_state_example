@@ -12,7 +12,7 @@ import 'package:provider/provider.dart' as provider;
 enum StateSystem { form, cubit, provider, riverPod }
 
 void main() {
-  StateSystem stateSystem = StateSystem.riverPod;
+  StateSystem stateSystem = StateSystem.form;
 
   switch (stateSystem) {
     case StateSystem.form:
