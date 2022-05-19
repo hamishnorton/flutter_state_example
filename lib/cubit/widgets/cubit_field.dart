@@ -25,7 +25,15 @@ class CubitField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
+      // child: TextField(
+      //   // TODO: Can this be a TextField, but we need a controller
+      //   initialValue: initialValue,
+      //   onChanged: onChanged,
+      //   inputFormatters: inputFormatters,
+      //   decoration: InputDecoration(hintText: hintText, errorText: errorText),
+      // ),
       child: TextFormField(
+        // TODO: Can this be a TextField
         initialValue: initialValue,
         onChanged: onChanged,
         inputFormatters: inputFormatters,

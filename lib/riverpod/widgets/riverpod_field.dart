@@ -24,6 +24,7 @@ class RiverPodField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        // TODO: Can this be a TextField?
         initialValue: initialValue,
         onChanged: onChanged,
         inputFormatters: inputFormatters,

@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_state_example/cubit/validation_model.dart';
 import 'package:flutter_state_example/validator.dart';
-import 'package:meta/meta.dart';
 
 part 'cubit_form_state.dart';
 
