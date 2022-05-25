@@ -44,7 +44,10 @@ class Validator {
     if (phone == null || phone.isEmpty) {
       return 'Enter your phone number';
     }
-    // TODO: Add character validation so only numbers and +- and space
+    final regexPattern = RegExp(r'');
+    if (!regexPattern.hasMatch(phone)) {
+      return 'Requires digits, + or -, no spaces';
+    }
     return null;
   }
 }

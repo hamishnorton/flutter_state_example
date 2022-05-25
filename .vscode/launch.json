@@ -5,9 +5,40 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "flutter_state_example",
+			"name": "Cubit",
 			"request": "launch",
-			"type": "dart"
+			"type": "dart",
+			"toolArgs": [
+				"--dart-define",
+				"FSE_TYPE=cubit",
+			],
+		},
+		{
+			"name": "Form",
+			"request": "launch",
+			"type": "dart",
+			"toolArgs": [
+				"--dart-define",
+				"FSE_TYPE=form",
+			],
+		},
+		{
+			"name": "Provider",
+			"request": "launch",
+			"type": "dart",
+			"toolArgs": [
+				"--dart-define",
+				"FSE_TYPE=provider",
+			],
+		},
+		{
+			"name": "RiverPod",
+			"request": "launch",
+			"type": "dart",
+			"toolArgs": [
+				"--dart-define",
+				"FSE_TYPE=riverpod",
+			],
 		},
 		{
 			"name": "flutter_state_example (profile mode)",

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_state_example/cubit/validation_model.dart';
 import 'package:flutter_state_example/validator.dart';
 
-part 'cubit_form_state.dart';
+part 'form_cubit_state.dart';
 
-class FormCubit extends Cubit<CubitFormState> {
+class FormCubit extends Cubit<FormCubitState> {
   FormCubit() : super(FormInitial());
 
   bool _isValidationOn = false;

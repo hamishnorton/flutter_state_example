@@ -21,4 +21,23 @@ class Styles {
           : null,
     );
   }
+
+  static InputDecoration buildInputDecorationWithoutError(
+    String? hintText,
+    String? label,
+  ) {
+    return InputDecoration(
+      hintText: hintText,
+      label: (label != null) ? Text(label) : null,
+      counterText: '',
+      // suffixIcon: (errorText != null)
+      //     ? const Padding(
+      //         padding: EdgeInsetsDirectional.only(end: 12.0),
+      //         child: Icon(
+      //           Icons.warning,
+      //           color: Colors.red,
+      //         ))
+      //     : null,
+    );
+  }
 }

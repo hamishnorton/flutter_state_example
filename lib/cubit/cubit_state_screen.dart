@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_state_example/cubit/form_cubit.dart';
-import 'package:flutter_state_example/cubit/widgets/cubit_field.dart';
+import 'package:flutter_state_example/base_field_widgets/base_text_field.dart';
+import 'package:flutter_state_example/cubit/cubit/form_cubit.dart';
 
 class CubitStateScreen extends StatefulWidget {
   const CubitStateScreen({Key? key}) : super(key: key);
@@ -31,11 +31,11 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              BlocBuilder<FormCubit, CubitFormState>(
+              BlocBuilder<FormCubit, FormCubitState>(
                 buildWhen: (p, c) =>
                     (p.name != c.name), // or compare on name.value
                 builder: (context, state) {
-                  return CubitField(
+                  return BaseTextField(
                     hintText: 'Name',
                     keyboardType: TextInputType.name,
                     initialValue: state.name.value ?? '',
@@ -45,10 +45,10 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                   );
                 },
               ),
-              BlocBuilder<FormCubit, CubitFormState>(
+              BlocBuilder<FormCubit, FormCubitState>(
                 buildWhen: (p, c) => (p.email != c.email),
                 builder: (context, state) {
-                  return CubitField(
+                  return BaseTextField(
                     keyboardType: TextInputType.emailAddress,
                     hintText: 'Email',
                     initialValue: state.email.value ?? '',
@@ -58,10 +58,10 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                   );
                 },
               ),
-              BlocBuilder<FormCubit, CubitFormState>(
+              BlocBuilder<FormCubit, FormCubitState>(
                 buildWhen: (p, c) => (c.phone != p.phone),
                 builder: (context, state) {
-                  return CubitField(
+                  return BaseTextField(
                     hintText: 'Phone',
                     initialValue: state.phone.value ?? '',
                     keyboardType: TextInputType.phone,
@@ -75,7 +75,7 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                   );
                 },
               ),
-              BlocBuilder<FormCubit, CubitFormState>(
+              BlocBuilder<FormCubit, FormCubitState>(
                 buildWhen: (p, c) => (c.password != p.password),
                 builder: (context, state) {
                   return Padding(
@@ -96,14 +96,14 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                   );
                 },
               ),
-              BlocBuilder<FormCubit, CubitFormState>(
+              BlocBuilder<FormCubit, FormCubitState>(
                 buildWhen: (p, c) => (c.isValid != p.isValid),
                 builder: (context, state) {
                   return ElevatedButton(
                     onPressed: () {
                       FormCubit formCubit = context.read<FormCubit>();
                       formCubit.validated();
-                      CubitFormState readState = formCubit.state;
+                      FormCubitState readState = formCubit.state;
 
                       if (!(readState.isValid ?? false)) return;
 

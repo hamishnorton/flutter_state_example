@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
 import 'widgets/riverpod_form.dart';
 
-class RiverPodScreen extends StatefulWidget {
+class RiverPodScreen extends StatelessWidget {
   const RiverPodScreen({Key? key}) : super(key: key);
-
-  //todo: could this be stateless
-  @override
-  State<RiverPodScreen> createState() => _RiverPodScreenState();
-}
-
-class _RiverPodScreenState extends State<RiverPodScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

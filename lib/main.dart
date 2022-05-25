@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_state_example/cubit/cubit/form_cubit.dart';
 import 'package:flutter_state_example/cubit/cubit_state_screen.dart';
-import 'package:flutter_state_example/cubit/form_cubit.dart';
-import 'package:flutter_state_example/form_state/form_state_screen.dart';
+import 'package:flutter_state_example/extensions/extensions.dart';
+import 'package:flutter_state_example/form/form_state_screen.dart';
 import 'package:flutter_state_example/provider/form_provider.dart';
 import 'package:flutter_state_example/provider/provider_state_screen.dart';
 import 'package:flutter_state_example/riverpod/riverpod.dart';
@@ -12,7 +13,12 @@ import 'package:provider/provider.dart' as provider;
 enum StateSystem { form, cubit, provider, riverPod }
 
 void main() {
-  StateSystem stateSystem = StateSystem.riverPod;
+  const value = String.fromEnvironment('FSE_TYPE');
+  debugPrint('FSE_TYPE: $value');
+  final lowerTrimmed = value.toLowerCase().trim();
+  StateSystem stateSystem =
+      lowerTrimmed.toEnum<StateSystem>(StateSystem.values);
+  //StateSystem stateSystem = StateSystem.riverPod;
 
   switch (stateSystem) {
     case StateSystem.form:

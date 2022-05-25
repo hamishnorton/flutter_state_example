@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_state_example/base_field_widgets/base_text_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../form_model.dart';
 import '../riverpod.dart';
 import '../validation_model.dart';
-import 'riverpod_field.dart';
 
 // To clean up below in your application you could replace the consumers
 // with specific widgets for each of the fields that extends ConsumerWidget
@@ -24,7 +24,7 @@ class RiverPodForm extends ConsumerWidget {
           builder: (context, ref, child) {
             ValidationModel name =
                 ref.watch(formStateProvider.select((f) => f.name));
-            return RiverPodField(
+            return BaseTextField(
               hintText: 'Name',
               keyboardType: TextInputType.name,
               initialValue: name.value ?? '',
@@ -38,7 +38,7 @@ class RiverPodForm extends ConsumerWidget {
           builder: (context, ref, child) {
             ValidationModel email =
                 ref.watch(formStateProvider.select((f) => f.email));
-            return RiverPodField(
+            return BaseTextField(
               keyboardType: TextInputType.emailAddress,
               hintText: 'Email',
               initialValue: email.value ?? '',
@@ -52,7 +52,7 @@ class RiverPodForm extends ConsumerWidget {
           builder: (context, ref, child) {
             ValidationModel phone =
                 ref.watch(formStateProvider.select((f) => f.phone));
-            return RiverPodField(
+            return BaseTextField(
               hintText: 'Phone',
               initialValue: phone.value ?? '',
               keyboardType: TextInputType.phone,

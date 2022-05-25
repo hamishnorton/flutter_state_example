@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_state_example/base_field_widgets/base_text_field.dart';
 import 'package:flutter_state_example/provider/form_provider.dart';
-import 'package:flutter_state_example/provider/widgets/provider_field.dart';
 import 'package:provider/provider.dart';
 
 class ProviderStateScreen extends StatefulWidget {
@@ -38,21 +38,21 @@ class _ProviderStateScreenState extends State<ProviderStateScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              ProviderField(
+              BaseTextField(
                 hintText: 'Name',
                 keyboardType: TextInputType.name,
                 initialValue: _formProvider.name.value ?? '',
                 onChanged: _formProvider.nameChanged,
                 errorText: _formProvider.name.error,
               ),
-              ProviderField(
+              BaseTextField(
                 keyboardType: TextInputType.emailAddress,
                 hintText: 'Email',
                 initialValue: _formProvider.email.value ?? '',
                 onChanged: _formProvider.emailChanged,
                 errorText: _formProvider.email.error,
               ),
-              ProviderField(
+              BaseTextField(
                 hintText: 'Phone',
                 initialValue: _formProvider.phone.value ?? '',
                 keyboardType: TextInputType.phone,
