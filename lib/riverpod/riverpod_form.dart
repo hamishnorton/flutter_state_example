@@ -45,8 +45,9 @@ class RiverPodForm extends ConsumerWidget {
             watch: () => formStateProvider.select((f) => f.password)),
         Consumer(
           builder: (context, ref, child) {
-            bool isValid =
-                ref.watch(formStateProvider.select((f) => f.isValid ?? false));
+            // option to listen for when the form becomes valid
+            // bool isValid =
+            //     ref.watch(formStateProvider.select((f) => f.isValid ?? false));
             return ElevatedButton(
               onPressed: () {
                 ref.read(formStateProvider.notifier).validated();
