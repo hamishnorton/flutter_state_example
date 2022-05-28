@@ -39,22 +39,25 @@ class _ProviderStateScreenState extends State<ProviderStateScreen> {
           child: Column(
             children: [
               BaseTextField(
-                hintText: 'Name',
+                label: 'Name',
+                hintText: '',
                 keyboardType: TextInputType.name,
-                initialValue: _formProvider.name.value ?? '',
+                value: _formProvider.name.value ?? '',
                 onChanged: _formProvider.nameChanged,
                 errorText: _formProvider.name.error,
               ),
               BaseTextField(
+                label: 'Email',
                 keyboardType: TextInputType.emailAddress,
-                hintText: 'Email',
-                initialValue: _formProvider.email.value ?? '',
+                hintText: 'name@domain.com',
+                value: _formProvider.email.value ?? '',
                 onChanged: _formProvider.emailChanged,
                 errorText: _formProvider.email.error,
               ),
               BaseTextField(
-                hintText: 'Phone',
-                initialValue: _formProvider.phone.value ?? '',
+                label: 'Phone',
+                hintText: '+64 21 123 456',
+                value: _formProvider.phone.value ?? '',
                 keyboardType: TextInputType.phone,
                 inputFormatters: [
                   FilteringTextInputFormatter.singleLineFormatter,

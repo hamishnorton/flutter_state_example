@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/riverpod_form.dart';
+import 'riverpod_form.dart';
 
 class RiverPodScreen extends StatelessWidget {
   const RiverPodScreen({Key? key}) : super(key: key);

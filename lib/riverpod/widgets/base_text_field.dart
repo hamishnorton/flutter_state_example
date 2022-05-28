@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_state_example/riverpod/text_field_model.dart';
 import 'package:flutter_state_example/theme/theme.dart';
-// for FilteringTextInputFormatter
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class BaseTextField extends StatelessWidget {
+class BaseTextField extends ConsumerWidget {
   const BaseTextField({
     Key? key,
-    required this.errorText,
+    //required this.fieldModel,
     required this.hintText,
-    this.value = '',
     this.inputFormatters,
     this.keyboardType = TextInputType.text,
     required this.label,
     this.onChanged,
+    required this.watch,
   }) : super(key: key);
 
-  final String? errorText;
+  //final TextFieldModel fieldModel;
   final String hintText;
-  final String? value;
   final List<TextInputFormatter>? inputFormatters;
   final String label;
   final TextInputType keyboardType;
   final Function(String?)? onChanged;
+  final Function watch;
 
   @override
-  Widget build(BuildContext context) {
-    debugPrint('BaseTextField.build()');
+  Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint('BaseTextFieldWWithModel.build()');
+    TextFieldModel fieldModel = ref.watch(watch());
     return Padding(
       padding: const EdgeInsets.all(8.0),
       // Thought:  given this isn't statefule can we use the likes of TextField instead?
+      // Thought: Can't use TextField as it needs a controller
+      // Thought: What if we did use a controller, the watch would update the controller
       child: TextFormField(
-        decoration: Styles.buildInputDecoration(errorText, hintText, label),
-        initialValue: value,
+        decoration:
+            Styles.buildInputDecoration(fieldModel.error, hintText, label),
+        initialValue: fieldModel.value,
         inputFormatters: inputFormatters,
         onChanged: onChanged,
       ),

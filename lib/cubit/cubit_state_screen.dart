@@ -36,9 +36,10 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                     (p.name != c.name), // or compare on name.value
                 builder: (context, state) {
                   return BaseTextField(
-                    hintText: 'Name',
+                    label: 'Name',
+                    hintText: '',
                     keyboardType: TextInputType.name,
-                    initialValue: state.name.value ?? '',
+                    value: state.name.value ?? '',
                     onChanged: (value) =>
                         context.read<FormCubit>().nameChanged(value),
                     errorText: state.name.error,
@@ -49,9 +50,10 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                 buildWhen: (p, c) => (p.email != c.email),
                 builder: (context, state) {
                   return BaseTextField(
+                    label: 'Email',
                     keyboardType: TextInputType.emailAddress,
-                    hintText: 'Email',
-                    initialValue: state.email.value ?? '',
+                    hintText: 'name@domain.com',
+                    value: state.email.value ?? '',
                     onChanged: (value) =>
                         context.read<FormCubit>().emailChanged(value),
                     errorText: state.email.error,
@@ -62,8 +64,9 @@ class _CubitStateScreenState extends State<CubitStateScreen> {
                 buildWhen: (p, c) => (c.phone != p.phone),
                 builder: (context, state) {
                   return BaseTextField(
-                    hintText: 'Phone',
-                    initialValue: state.phone.value ?? '',
+                    label: 'Phone',
+                    hintText: '+62 21 123 456',
+                    value: state.phone.value ?? '',
                     keyboardType: TextInputType.phone,
                     inputFormatters: [
                       FilteringTextInputFormatter.singleLineFormatter,

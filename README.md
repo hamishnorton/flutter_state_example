@@ -19,6 +19,9 @@ A very basic flutter app that shows various methods of state management
 
 `fvm use 3.0.1`
 
+`launch.json` has a configuration for each State System.
+
+
 ## ToDo
 
 1. Focus to first field that is invalid after click on button

@@ -1,4 +1,4 @@
-import 'package:flutter_state_example/riverpod/validation_model.dart';
+import 'package:flutter_state_example/riverpod/text_field_model.dart';
 import 'package:flutter_state_example/validator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,7 +17,7 @@ class FormStateNotifier extends StateNotifier<FormModel> {
   void _validateName(String? name) {
     final String? error =
         (state.validationEnabled) ? Validator.isName(name) : null;
-    final newVm = ValidationModel(name, error);
+    final newVm = TextFieldModel(name, error);
     state = state.copyWith(name: newVm);
   }
 
@@ -29,7 +29,7 @@ class FormStateNotifier extends StateNotifier<FormModel> {
   void _validateEmail(String? email) {
     final String? error =
         (state.validationEnabled) ? Validator.isEmail(email) : null;
-    final newVm = ValidationModel(email, error);
+    final newVm = TextFieldModel(email, error);
     state = state.copyWith(email: newVm);
   }
 
@@ -41,7 +41,7 @@ class FormStateNotifier extends StateNotifier<FormModel> {
   void _validatePhone(String? phone) {
     final String? error =
         (state.validationEnabled) ? Validator.isPhone(phone) : null;
-    final newVm = ValidationModel(phone, error);
+    final newVm = TextFieldModel(phone, error);
     state = state.copyWith(phone: newVm);
   }
 
@@ -53,7 +53,7 @@ class FormStateNotifier extends StateNotifier<FormModel> {
   void _validatePassword(String? password) {
     final String? error =
         (state.validationEnabled) ? Validator.isPassword(password) : null;
-    final newVm = ValidationModel(password, error);
+    final newVm = TextFieldModel(password, error);
     state = state.copyWith(password: newVm);
   }
 
