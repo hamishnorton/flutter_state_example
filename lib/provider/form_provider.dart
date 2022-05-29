@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_state_example/provider/validation_model.dart';
-import 'package:flutter_state_example/validator.dart';
+import 'package:flutter_state_example/common/validator.dart';
 
 class FormProvider extends ChangeNotifier {
   ValidationModel _email = ValidationModel(null, null);

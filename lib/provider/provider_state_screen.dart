@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/base_field_widgets/base_text_field.dart';
+import 'package:flutter_state_example/common/base_field_widgets/base_text_field.dart';
 import 'package:flutter_state_example/provider/form_provider.dart';
 import 'package:provider/provider.dart';
 

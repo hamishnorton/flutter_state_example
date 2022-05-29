@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/riverpod/widgets/base_text_field.dart';
+import 'package:flutter_state_example/riverpod/widgets/riverpod_base_text_field.dart';
 
 class NameField extends StatelessWidget {
   const NameField({
@@ -16,7 +16,7 @@ class NameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseTextField(
+    return RiverpodBaseTextField(
       hintText: 'firstname surname',
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z-' ']'))

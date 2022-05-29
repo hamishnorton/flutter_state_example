@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_state_example/form/widgets/base_text_form_field.dart';
-import 'package:flutter_state_example/validator.dart';
+import 'package:flutter_state_example/common/validator.dart';
 
 class EmailTextFormField extends StatelessWidget {
   const EmailTextFormField(

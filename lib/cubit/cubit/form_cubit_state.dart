@@ -2,10 +2,10 @@ part of 'form_cubit.dart';
 
 @immutable
 abstract class FormCubitState {
-  final ValidationModel name;
-  final ValidationModel email;
-  final ValidationModel phone;
-  final ValidationModel password;
+  final TextFieldModel name;
+  final TextFieldModel email;
+  final TextFieldModel phone;
+  final TextFieldModel password;
   final bool validationEnabled;
 
   const FormCubitState(
@@ -19,12 +19,12 @@ abstract class FormCubitState {
 
 class FormInitial extends FormCubitState {
   FormInitial()
-      : super(ValidationModel(null, null), ValidationModel(null, null),
-            ValidationModel(null, null), ValidationModel(null, null), false);
+      : super(TextFieldModel(null, null), TextFieldModel(null, null),
+            TextFieldModel(null, null), TextFieldModel(null, null), false);
 }
 
 class Changed extends FormCubitState {
-  const Changed(ValidationModel name, ValidationModel email,
-      ValidationModel phone, ValidationModel password, bool validationEnabled)
+  const Changed(TextFieldModel name, TextFieldModel email, TextFieldModel phone,
+      TextFieldModel password, bool validationEnabled)
       : super(name, email, phone, password, validationEnabled);
 }

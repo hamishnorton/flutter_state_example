@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_state_example/cubit/validation_model.dart';
-import 'package:flutter_state_example/validator.dart';
+import 'package:flutter_state_example/common/value_objects/text_field_model.dart';
+import 'package:flutter_state_example/common/validator.dart';
 
 part 'form_cubit_state.dart';
 
@@ -9,9 +9,7 @@ class FormCubit extends Cubit<FormCubitState> {
   FormCubit() : super(FormInitial());
 
   bool _isValidationOn = false;
-  // TODO: could I be using the state instead?
 
-  // TODO: question: what would happen if we didn't allow null?
   // TODO: Add .copyWith
 
   void nameChanged(String? name) {
@@ -21,7 +19,7 @@ class FormCubit extends Cubit<FormCubitState> {
 
   void _validateName(String? name) {
     final String? error = (_isValidationOn) ? Validator.isName(name) : null;
-    final newVm = ValidationModel(name, error);
+    final newVm = TextFieldModel(name, error);
     emit(Changed(
         newVm, state.email, state.phone, state.password, _isValidationOn));
   }
@@ -33,7 +31,7 @@ class FormCubit extends Cubit<FormCubitState> {
 
   void _validateEmail(String? email) {
     final String? error = (_isValidationOn) ? Validator.isEmail(email) : null;
-    final newVm = ValidationModel(email, error);
+    final newVm = TextFieldModel(email, error);
     emit(Changed(
         state.name, newVm, state.phone, state.password, _isValidationOn));
   }
@@ -45,7 +43,7 @@ class FormCubit extends Cubit<FormCubitState> {
 
   void _validatePhone(String? phone) {
     final String? error = (_isValidationOn) ? Validator.isPhone(phone) : null;
-    final newVm = ValidationModel(phone, error);
+    final newVm = TextFieldModel(phone, error);
     emit(Changed(
         state.name, state.email, newVm, state.password, _isValidationOn));
   }
@@ -58,7 +56,7 @@ class FormCubit extends Cubit<FormCubitState> {
   void _validatePassword(String? password) {
     final String? error =
         (_isValidationOn) ? Validator.isPassword(password) : null;
-    final newVm = ValidationModel(password, error);
+    final newVm = TextFieldModel(password, error);
     emit(Changed(state.name, state.email, state.phone, newVm, _isValidationOn));
   }
 

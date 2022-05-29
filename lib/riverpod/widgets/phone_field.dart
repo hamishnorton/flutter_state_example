@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/riverpod/widgets/base_text_field.dart';
+import 'package:flutter_state_example/riverpod/widgets/riverpod_base_text_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PhoneField extends ConsumerWidget {
@@ -16,7 +16,7 @@ class PhoneField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     debugPrint('PhoneField.build()');
 
-    return BaseTextField(
+    return RiverpodBaseTextField(
       hintText: '+64 21 123 456',
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'[\d+()-\s]'))

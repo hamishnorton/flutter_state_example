@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/riverpod/text_field_model.dart';
+import 'package:flutter_state_example/common/value_objects/text_field_model.dart';
 import 'package:flutter_state_example/theme/theme.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class BaseTextField extends ConsumerWidget {
-  const BaseTextField({
+class RiverpodBaseTextField extends ConsumerWidget {
+  const RiverpodBaseTextField({
     Key? key,
     //required this.fieldModel,
     required this.hintText,

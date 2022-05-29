@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_state_example/cubit/cubit/form_cubit.dart';
-import 'package:flutter_state_example/cubit/cubit_state_screen.dart';
+import 'package:flutter_state_example/cubit/cubit_screen.dart';
 import 'package:flutter_state_example/extensions/extensions.dart';
 import 'package:flutter_state_example/form/form_state_screen.dart';
 import 'package:flutter_state_example/provider/form_provider.dart';
@@ -57,7 +57,7 @@ class App extends StatelessWidget {
       case StateSystem.cubit:
         home = BlocProvider<FormCubit>(
           create: (BuildContext context) => FormCubit(),
-          child: const CubitStateScreen(),
+          child: const CubitScreen(),
         );
         break;
       case StateSystem.provider:

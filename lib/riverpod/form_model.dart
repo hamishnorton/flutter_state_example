@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_example/riverpod/text_field_model.dart';
+import 'package:flutter_state_example/common/value_objects/text_field_model.dart';
 
 @immutable // todo: find out if this is needed as the class is already immutable by design?
 class FormModel {

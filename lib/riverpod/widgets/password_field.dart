@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/riverpod/widgets/base_text_field.dart';
+import 'package:flutter_state_example/riverpod/widgets/riverpod_base_text_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PasswordField extends ConsumerWidget {
@@ -16,7 +16,7 @@ class PasswordField extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     debugPrint('PasswordField.build()');
 
-    return BaseTextField(
+    return RiverpodBaseTextField(
       hintText: 'aB^1',
       inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'[\s\t\n]'))],
       label: label,

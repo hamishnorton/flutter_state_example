@@ -5,7 +5,6 @@ import 'package:flutter_state_example/riverpod/widgets/password_field.dart';
 import 'package:flutter_state_example/riverpod/widgets/phone_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'form_model.dart';
 import 'riverpod.dart';
 
 // To clean up below in your application you could replace the consumers
@@ -43,7 +42,6 @@ class RiverPodForm extends ConsumerWidget {
             onChanged: (value) =>
                 ref.read(formStateProvider.notifier).passwordChanged(value),
             watch: () => formStateProvider.select((f) => f.password)),
-        
       ],
     );
   }

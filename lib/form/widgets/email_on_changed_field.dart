@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_state_example/form/widgets/base_text_on_changed_field.dart';
-import 'package:flutter_state_example/validator.dart';
+import 'package:flutter_state_example/common/validator.dart';
 
 class EmailOnChangedField extends StatelessWidget {
   const EmailOnChangedField({
