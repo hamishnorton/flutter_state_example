@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_state_example/riverpod/widgets/riverpod_base_text_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PhoneField extends ConsumerWidget {
-  const PhoneField(
+class RiverpodPasswordField extends ConsumerWidget {
+  const RiverpodPasswordField(
       {required this.label, this.onChanged, required this.watch, Key? key})
       : super(key: key);
 
@@ -14,16 +14,13 @@ class PhoneField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint('PhoneField.build()');
-
     return RiverpodBaseTextField(
-      hintText: '+64 21 123 456',
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[\d+()-\s]'))
-      ],
+      hintText: 'aB^1',
+      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'[\s\t\n]'))],
       label: label,
-      keyboardType: TextInputType.phone,
-      onChanged: (value) => onChanged!(value!),
+      keyboardType: TextInputType.visiblePassword,
+      obscureText: true,
+      onChanged: onChanged,
       watch: watch,
     );
   }

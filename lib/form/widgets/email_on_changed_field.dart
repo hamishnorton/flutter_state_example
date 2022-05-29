@@ -19,6 +19,8 @@ class EmailOnChangedField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('EmailOnchangedField.build()');
+
     return BaseTextOnChangedField(
       hintText: 'name@domain.com',
       initialValue: initialValue,

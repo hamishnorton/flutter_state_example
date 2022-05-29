@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_example/riverpod/widgets/name_field.dart';
-import 'package:flutter_state_example/riverpod/widgets/email_field.dart';
-import 'package:flutter_state_example/riverpod/widgets/password_field.dart';
-import 'package:flutter_state_example/riverpod/widgets/phone_field.dart';
+import 'package:flutter_state_example/riverpod/widgets/riverpod_name_field.dart';
+import 'package:flutter_state_example/riverpod/widgets/riverpod_email_field.dart';
+import 'package:flutter_state_example/riverpod/widgets/riverpod_password_field.dart';
+import 'package:flutter_state_example/riverpod/widgets/riverpod_phone_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'riverpod.dart';
@@ -18,6 +18,7 @@ class RiverPodForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint('RiverpodForm.build()');
     return Column(
       children: [
         NameField(
@@ -26,18 +27,18 @@ class RiverPodForm extends ConsumerWidget {
               ref.read(formStateProvider.notifier).nameChanged(value),
           watch: () => formStateProvider.select((f) => f.name),
         ),
-        EmailField(
+        RiverpodEmailField(
           label: 'Email',
           onChanged: (value) =>
               ref.read(formStateProvider.notifier).emailChanged(value),
           watch: () => formStateProvider.select((f) => f.email),
         ),
-        PhoneField(
+        RiverpodPhoneField(
             label: 'Phone',
             onChanged: (value) =>
                 ref.read(formStateProvider.notifier).phoneChanged(value),
             watch: () => formStateProvider.select((f) => f.phone)),
-        PasswordField(
+        RiverpodPasswordField(
             label: 'Password',
             onChanged: (value) =>
                 ref.read(formStateProvider.notifier).passwordChanged(value),

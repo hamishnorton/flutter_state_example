@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_state_example/form/widgets/base_text_value_listenable_field.dart';
 import 'package:flutter_state_example/common/validator.dart';
 
-class PasswordField extends StatelessWidget {
-  const PasswordField(
+class ValueListenableNameField extends StatelessWidget {
+  const ValueListenableNameField(
       {Key? key,
       required this.controller,
       required this.label,
@@ -19,14 +19,16 @@ class PasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseTextValueListenableField(
       controller: controller,
-      hintText: 'aB^1',
-      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'[\s\t\n]'))],
+      hintText: 'firstname surname',
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z-' ']'))
+      ],
       label: label,
-      keyboardType: TextInputType.visiblePassword,
+      keyboardType: TextInputType.name,
       validationEnabled: validationEnabled,
       validator: (value) {
         // Thought: If this is the only usage of the validator consider adding it to this Widget as a static method so it can be unit tested.
-        return Validator.isPassword(value);
+        return Validator.isName(value);
       },
     );
   }

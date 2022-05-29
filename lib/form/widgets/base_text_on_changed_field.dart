@@ -46,13 +46,15 @@ class _BaseTextOnChangedFieldState extends State<BaseTextOnChangedField> {
   }
 
   String? get _errorText {
-     if (!widget.validationEnabled) return null;
-     
+    if (!widget.validationEnabled) return null;
+
     return _validate(_value);
   }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('BaseTextOnChangeField.build()');
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(

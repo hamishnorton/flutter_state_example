@@ -12,6 +12,7 @@ class BaseTextField extends StatelessWidget {
     this.inputFormatters,
     this.keyboardType = TextInputType.text,
     required this.label,
+    this.obscureText = false,
     this.onChanged,
   }) : super(key: key);
 
@@ -21,11 +22,13 @@ class BaseTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String label;
   final TextInputType keyboardType;
-  final Function(String?)? onChanged;
+  final bool obscureText;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
     debugPrint('BaseTextField.build()');
+    
     return Padding(
       padding: const EdgeInsets.all(8.0),
       // Thought:  given this isn't statefule can we use the likes of TextField instead?
@@ -33,6 +36,7 @@ class BaseTextField extends StatelessWidget {
         decoration: Styles.buildInputDecoration(errorText, hintText, label),
         initialValue: value,
         inputFormatters: inputFormatters,
+        obscureText: obscureText,
         onChanged: onChanged,
       ),
     );

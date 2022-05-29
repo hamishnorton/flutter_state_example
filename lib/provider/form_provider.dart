@@ -1,16 +1,16 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_state_example/provider/validation_model.dart';
+import 'package:flutter_state_example/common/value_objects/text_field_model.dart';
 import 'package:flutter_state_example/common/validator.dart';
 
 class FormProvider extends ChangeNotifier {
-  ValidationModel _email = ValidationModel(null, null);
-  ValidationModel _password = ValidationModel(null, null);
-  ValidationModel _phone = ValidationModel(null, null);
-  ValidationModel _name = ValidationModel(null, null);
-  ValidationModel get email => _email;
-  ValidationModel get password => _password;
-  ValidationModel get phone => _phone;
-  ValidationModel get name => _name;
+  TextFieldModel _email = TextFieldModel.empty();
+  TextFieldModel _password = TextFieldModel.empty();
+  TextFieldModel _phone = TextFieldModel.empty();
+  TextFieldModel _name = TextFieldModel.empty();
+  TextFieldModel get email => _email;
+  TextFieldModel get password => _password;
+  TextFieldModel get phone => _phone;
+  TextFieldModel get name => _name;
 
   bool _isValidationOn = false;
 
@@ -22,7 +22,7 @@ class FormProvider extends ChangeNotifier {
 
   void _validateEmail(String? email) {
     String? error = (_isValidationOn) ? Validator.isEmail(email) : null;
-    _email = ValidationModel(email, error);
+    _email = TextFieldModel(email, error);
   }
 
   void passwordChanged(String? password) {
@@ -33,7 +33,7 @@ class FormProvider extends ChangeNotifier {
 
   void _validatePassword(String? password) {
     String? error = (_isValidationOn) ? Validator.isPassword(password) : null;
-    _password = ValidationModel(password, error);
+    _password = TextFieldModel(password, error);
   }
 
   void nameChanged(String? name) {
@@ -44,7 +44,7 @@ class FormProvider extends ChangeNotifier {
 
   void _validateName(String? name) {
     String? error = (_isValidationOn) ? Validator.isName(name) : null;
-    _name = ValidationModel(name, error);
+    _name = TextFieldModel(name, error);
   }
 
   void phoneChanged(String? phone) {
@@ -55,7 +55,7 @@ class FormProvider extends ChangeNotifier {
 
   void _validatePhone(String? phone) {
     String? error = (_isValidationOn) ? Validator.isPhone(phone) : null;
-    _phone = ValidationModel(phone, error);
+    _phone = TextFieldModel(phone, error);
   }
 
   void validate() {}

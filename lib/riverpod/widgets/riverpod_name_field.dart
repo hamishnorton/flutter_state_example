@@ -23,7 +23,7 @@ class NameField extends StatelessWidget {
       ],
       label: label,
       keyboardType: TextInputType.name,
-      onChanged: (value) => onChanged!(value!),
+      onChanged: onChanged,
       watch: watch,
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_example/form/app_form.dart';
 import 'package:flutter_state_example/form/widgets/email_value_listenable_field.dart';
-import 'package:flutter_state_example/form/widgets/name_field.dart';
-import 'package:flutter_state_example/form/widgets/password_field.dart';
-import 'package:flutter_state_example/form/widgets/phone_field.dart';
+import 'package:flutter_state_example/form/widgets/value_listenable_name_field.dart';
+import 'package:flutter_state_example/form/widgets/value_listenable_password_field.dart';
+import 'package:flutter_state_example/form/widgets/value_listenable_phone_field.dart';
 
 class FormStateForm extends StatefulWidget {
   const FormStateForm({Key? key, required this.formKey}) : super(key: key);
@@ -52,7 +52,7 @@ class _FormStateFormState extends State<FormStateForm> {
         builder: (state) {
           debugPrint('AppForm.builder:');
           return Column(children: [
-            NameField(
+            ValueListenableNameField(
               controller: _nameController,
               label: 'Name',
               validationEnabled: state.submitted,
@@ -62,11 +62,11 @@ class _FormStateFormState extends State<FormStateForm> {
               label: 'EmailValueListenableField',
               validationEnabled: state.submitted,
             ),
-            PhoneField(
+            ValueListenablePhoneField(
                 controller: _phoneController,
                 label: 'Phone',
                 validationEnabled: state.submitted),
-            PasswordField(
+            ValueListenablePasswordField(
                 controller: _passwordController,
                 label: 'Password',
                 validationEnabled: state.submitted),

@@ -17,6 +17,8 @@ class EmailTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('EmailTextFormField.build()');
+
     return BaseTextFormField(
       controller: controller,
       hintText: 'name@domain.com',

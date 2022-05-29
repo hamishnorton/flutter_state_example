@@ -12,6 +12,7 @@ class BaseTextValueListenableField extends StatelessWidget {
     this.inputFormatters,
     this.keyboardType = TextInputType.text,
     required this.label,
+    this.obscureText = false,
     this.validationEnabled = true,
     this.validator,
   }) : super(key: key);
@@ -21,6 +22,7 @@ class BaseTextValueListenableField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType keyboardType;
   final String label;
+  final bool obscureText;
   final bool validationEnabled;
   final FormFieldValidator? validator;
 
@@ -38,21 +40,26 @@ class BaseTextValueListenableField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('BaseTextValueListenableField.build()');
+
     // https://api.flutter.dev/flutter/widgets/ValueListenableBuilder-class.html
     return ValueListenableBuilder(
       valueListenable: controller,
       builder: (_, __, ___) {
+        debugPrint('ValueListenableBuilder.builder()');
+
         return TextFormField(
-          controller: controller,
-          validator: (value) {
-            return _validate(value);
-          },
           autovalidateMode: validationEnabled
               ? AutovalidateMode.onUserInteraction
               : AutovalidateMode.disabled,
+          controller: controller,
           decoration: Styles.buildInputDecoration(_errorText, hintText, label),
           inputFormatters: inputFormatters,
           keyboardType: keyboardType,
+          obscureText: obscureText,
+          validator: (value) {
+            return _validate(value);
+          },
         );
       },
     );

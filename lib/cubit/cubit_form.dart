@@ -9,6 +9,8 @@ class CubitForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('CubildForm.build()');
+
     return Column(
       children: [
         // I tried to inject a callback for the BlocBuilder
@@ -61,20 +63,16 @@ class CubitForm extends StatelessWidget {
         BlocBuilder<FormCubit, FormCubitState>(
           buildWhen: (p, c) => (c.password != p.password),
           builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                initialValue: state.password.value,
-                // probably not a good practise with a password
-                obscureText: true,
-                decoration: InputDecoration(
-                    hintText: 'Password', errorText: state.password.error),
-                onChanged: (value) =>
-                    context.read<FormCubit>().passwordChanged(value),
-                inputFormatters: [
-                  FilteringTextInputFormatter.singleLineFormatter,
-                ],
-              ),
+            return CubitBaseTextField(
+              label: 'Password',
+              hintText: 'aB^1',
+              inputFormatters: [
+                FilteringTextInputFormatter.singleLineFormatter,
+              ],
+              model: state.password,
+              obscureText: true,
+              onChanged: (value) =>
+                  context.read<FormCubit>().passwordChanged(value),
             );
           },
         ),

@@ -17,6 +17,8 @@ class EmailValueListenableField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('EmailValueListenableField.build()');
+
     return BaseTextValueListenableField(
       controller: controller,
       hintText: 'name@domain.com',

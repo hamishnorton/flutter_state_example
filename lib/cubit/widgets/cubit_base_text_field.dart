@@ -12,6 +12,7 @@ class CubitBaseTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     required this.label,
     required this.model,
+    this.obscureText = false,
     this.onChanged,
   }) : super(key: key);
 
@@ -19,12 +20,14 @@ class CubitBaseTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String label;
   final TextInputType keyboardType;
-  final Function(String?)? onChanged;
   final TextFieldModel model;
+  final bool obscureText;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('BlocBaseTextField.build()');
+    debugPrint('CubitBaseTextField.build()');
+
     return Padding(
         padding: const EdgeInsets.all(8.0),
         // Thought:  given this isn't statefule can we use the likes of TextField instead?
@@ -33,6 +36,7 @@ class CubitBaseTextField extends StatelessWidget {
           inputFormatters: inputFormatters,
           keyboardType: TextInputType.emailAddress,
           initialValue: model.value ?? '',
+          obscureText: obscureText,
           onChanged: onChanged,
         ));
   }

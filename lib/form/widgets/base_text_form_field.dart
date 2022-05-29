@@ -47,6 +47,8 @@ class _BaseTextFormFieldState extends State<BaseTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('BaseTextFormField.build()');
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(

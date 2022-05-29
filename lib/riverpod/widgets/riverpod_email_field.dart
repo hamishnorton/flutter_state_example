@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_state_example/riverpod/widgets/riverpod_base_text_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class EmailField extends ConsumerWidget {
-  const EmailField(
+class RiverpodEmailField extends ConsumerWidget {
+  const RiverpodEmailField(
       {required this.label, this.onChanged, required this.watch, Key? key})
       : super(key: key);
 
@@ -14,16 +14,16 @@ class EmailField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    debugPrint('EmailField.build()');
+    debugPrint('RiverpodEmailField.build()');
 
     return RiverpodBaseTextField(
       hintText: 'name@domain.com',
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9@.]'))
       ],
-      label: label,
       keyboardType: TextInputType.emailAddress,
-      onChanged: (value) => onChanged!(value!),
+      label: label,
+      onChanged: onChanged,
       watch: watch,
     );
   }
