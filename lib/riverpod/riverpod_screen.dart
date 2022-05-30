@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_example/riverpod/form_model.dart';
 import 'package:flutter_state_example/riverpod/riverpod.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'riverpod_form.dart';
 
 class RiverPodScreen extends StatelessWidget {

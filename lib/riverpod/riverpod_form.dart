@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_example/riverpod/widgets/riverpod_name_field.dart';
 import 'package:flutter_state_example/riverpod/widgets/riverpod_email_field.dart';
 import 'package:flutter_state_example/riverpod/widgets/riverpod_password_field.dart';
 import 'package:flutter_state_example/riverpod/widgets/riverpod_phone_field.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'riverpod.dart';
 
