@@ -10,6 +10,8 @@ import 'package:flutter_state_example/provider/provider_screen.dart';
 import 'package:flutter_state_example/riverpod/riverpod.dart';
 import 'package:provider/provider.dart' as provider;
 
+import 'on_changed_form/on_changed_screen.dart';
+
 enum StateSystem { form, cubit, provider, riverPod }
 
 void main() {
@@ -53,6 +55,7 @@ class App extends StatelessWidget {
     switch (stateSystem) {
       case StateSystem.form:
         home = const FormStateScreen();
+        home = const OnChangedScreen();
         break;
       case StateSystem.cubit:
         home = BlocProvider<FormCubit>(

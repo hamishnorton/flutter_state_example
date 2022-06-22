@@ -40,12 +40,14 @@ class _BaseTextOnChangedFieldState extends State<BaseTextOnChangedField> {
   }
 
   String? _validate(String? value) {
+    debugPrint('BaseTextOnChangedField._validate(value: $value)');
     if (widget.validator == null) return null;
 
     return widget.validator!(value);
   }
 
   String? get _errorText {
+    debugPrint('BaseTextOnChangedField._errorText');
     if (!widget.validationEnabled) return null;
 
     return _validate(_value);
@@ -60,6 +62,18 @@ class _BaseTextOnChangedFieldState extends State<BaseTextOnChangedField> {
       child: TextFormField(
         initialValue: widget.initialValue,
         onChanged: (text) {
+          debugPrint(
+              'BaseTextOnChangedField.TextFormField.onChanged(text: $text)');
+          //Thought: Could we only fire this if the value is valid?
+          if (widget.validator != null) {
+            final String? validationMessage = widget.validator!(text);
+            debugPrint(
+                'BaseTextOnChangedField.TextFormField.onChanged() validationMessage: $validationMessage');
+            final bool isValid = (validationMessage == null);
+            debugPrint(
+                'BaseTextOnChangedField.TextFormField.onChanged() isValid: $isValid');
+            if (!isValid) return;
+          }
           widget.onChanged(text);
           setState(() {
             _value = text;

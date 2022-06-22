@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/form/widgets/base_text_on_changed_field.dart';
+import 'package:flutter_state_example/on_changed_form/base_text_on_changed_field.dart';
 import 'package:flutter_state_example/common/validator.dart';
 
-class EmailOnChangedField extends StatelessWidget {
-  const EmailOnChangedField({
+class OnChangedEmailField extends StatelessWidget {
+  const OnChangedEmailField({
     Key? key,
     this.initialValue = '',
     required this.label,
@@ -32,6 +32,8 @@ class EmailOnChangedField extends StatelessWidget {
       onChanged: onChanged,
       validationEnabled: validationEnabled,
       validator: (value) {
+        debugPrint(
+            'OnChangedEmailField.BaseTestOnChangedField.validator(value: $value)');
         return Validator.isEmail(value);
       },
     );

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_example/form/app_form.dart';
-import 'package:flutter_state_example/form/form_state_form.dart';
 
-class FormStateScreen extends StatefulWidget {
-  const FormStateScreen({Key? key}) : super(key: key);
+import 'on_changed_form.dart';
+
+class OnChangedScreen extends StatefulWidget {
+  const OnChangedScreen({Key? key}) : super(key: key);
 
   @override
-  State<FormStateScreen> createState() => _FormStateScreenState();
+  State<OnChangedScreen> createState() => _OnChangedScreenState();
 }
 
-class _FormStateScreenState extends State<FormStateScreen> {
+class _OnChangedScreenState extends State<OnChangedScreen> {
   final _formKey = GlobalKey<AppFormState>();
 
   @override
@@ -24,14 +25,14 @@ class _FormStateScreenState extends State<FormStateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('FormStateScreen.build()');
+    debugPrint('OnChangedScreen.build()');
     return Scaffold(
       appBar: AppBar(title: const Text('stateSystem: Form')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
-            FormStateForm(formKey: _formKey),
+            OnChangedForm(formKey: _formKey),
             ElevatedButton(
               onPressed: () {
                 final submitSuccess = _formKey.currentState!.submit();

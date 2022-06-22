@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_example/form/app_form.dart';
-import 'package:flutter_state_example/form/widgets/email_value_listenable_field.dart';
+import 'package:flutter_state_example/form/widgets/value_listenable_email_field.dart';
 import 'package:flutter_state_example/form/widgets/value_listenable_name_field.dart';
 import 'package:flutter_state_example/form/widgets/value_listenable_password_field.dart';
 import 'package:flutter_state_example/form/widgets/value_listenable_phone_field.dart';
@@ -29,6 +29,13 @@ class _FormStateFormState extends State<FormStateForm> {
     debugPrint('_passwordController.text: ${_passwordController.text}');
   }
 
+  bool _validate() {
+    // Add inter field validation here
+    debugPrint('FormStateForm._validate()');
+    //TODO: Add form validation message
+    return true;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -47,8 +54,11 @@ class _FormStateFormState extends State<FormStateForm> {
   Widget build(BuildContext context) {
     debugPrint('FormStateForm.build()');
     return AppForm(
-        key: widget.formKey,
+        key: widget
+            .formKey, //Thought: Could the form supply itself with one if it's not provided?
+        // Only if the submit() is havving in the same scope and not in the screen above
         onSaved: (state) => _save(state),
+        validate: () => _validate(),
         builder: (state) {
           debugPrint('AppForm.builder:');
           return Column(children: [
@@ -57,7 +67,7 @@ class _FormStateFormState extends State<FormStateForm> {
               label: 'Name',
               validationEnabled: state.submitted,
             ),
-            EmailValueListenableField(
+            ValueListenableEmailField(
               controller: _emailController,
               label: 'EmailValueListenableField',
               validationEnabled: state.submitted,
