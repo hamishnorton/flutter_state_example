@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_example/common/app_form.dart';
 
-import 'on_changed_form.dart';
+import 'on_changed_value_form.dart';
 
-class OnChangedScreen extends StatefulWidget {
-  const OnChangedScreen({Key? key}) : super(key: key);
+class OnChangedValueScreen extends StatefulWidget {
+  const OnChangedValueScreen({Key? key}) : super(key: key);
 
   @override
-  State<OnChangedScreen> createState() => _OnChangedScreenState();
+  State<OnChangedValueScreen> createState() => _OnChangedValueScreenState();
 }
 
-class _OnChangedScreenState extends State<OnChangedScreen> {
+class _OnChangedValueScreenState extends State<OnChangedValueScreen> {
   final _formKey = GlobalKey<AppFormState>();
 
   @override
@@ -25,21 +25,21 @@ class _OnChangedScreenState extends State<OnChangedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('OnChangedScreen.build()');
+    debugPrint('OnChangedValueScreen.build()');
     return Scaffold(
-      appBar:
-          AppBar(title: const Text('Form with OnChanged Fields')),
+      appBar: AppBar(
+          title: const Text('Form with OnChanged ValueListenable Fields')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
-            OnChangedForm(formKey: _formKey),
+            OnChangedValueForm(formKey: _formKey),
             ElevatedButton(
               onPressed: () {
-                debugPrint('OnChangedScreen.onPressed()');
+                debugPrint('OnChangedValueScreen.onPressed()');
                 final submitSuccess = _formKey.currentState!.submit();
                 debugPrint(
-                    'OnChangedScreen.onPressed() submitSuccess: $submitSuccess');
+                    'OnChangedValueScreen.onPressed() submitSuccess: $submitSuccess');
               },
               child: const Text('Submit'),
             ),

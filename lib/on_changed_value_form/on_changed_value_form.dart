@@ -4,16 +4,16 @@ import 'package:flutter_state_example/common/app_form.dart';
 import 'email_field.dart';
 import 'phone_field.dart';
 
-class OnChangedForm extends StatefulWidget {
-  const OnChangedForm({Key? key, required this.formKey}) : super(key: key);
+class OnChangedValueForm extends StatefulWidget {
+  const OnChangedValueForm({Key? key, required this.formKey}) : super(key: key);
 
   final GlobalKey<AppFormState> formKey;
 
   @override
-  State<OnChangedForm> createState() => _OnChangedFormState();
+  State<OnChangedValueForm> createState() => _OnChangedValueFormState();
 }
 
-class _OnChangedFormState extends State<OnChangedForm> {
+class _OnChangedValueFormState extends State<OnChangedValueForm> {
   final String _name = '';
   String _email = '';
   String _phone = '';
@@ -66,20 +66,21 @@ class _OnChangedFormState extends State<OnChangedForm> {
             //   validationEnabled: state.submitted,
             // ),
             EmailField(
-              initialValue: _email,
-              label: 'EmailField',
-              onChanged: (newValue) {
-                debugPrint(
-                    'OnChangedForm.OnChangedEmailField.onChanged(newValue: $newValue)');
+                initialValue: _email,
+                label: 'EmailField',
+                onChanged: (newValue) {
+                  debugPrint(
+                      'OnChangedForm.OnChangedEmailField.onChanged(newValue: $newValue)');
 
-                setState(() {
-                  // required to update validation of the PhoneField
-                  _email = newValue;
-                });
-              },
-              // validationEnabled: state.submitted
-              validationEnabled: (state.submitted) ? _phone.isEmpty : false,
-            ),
+                  setState(() {
+                    // required to update validation of the PhoneField
+                    _email = newValue;
+                  });
+                },
+                validationEnabled: state.submitted
+                // todo: inter field validation
+                //validationEnabled: (state.submitted) ? _phone.isEmpty : false,
+                ),
             PhoneField(
               initialValue: _phone,
               label: 'Phone',
@@ -90,8 +91,8 @@ class _OnChangedFormState extends State<OnChangedForm> {
                   _phone = newValue;
                 });
               },
-              //validationEnabled: state.submitted,
-              validationEnabled: (state.submitted) ? _email.isEmpty : false,
+              validationEnabled: state.submitted,
+              //validationEnabled: (state.submitted) ? _email.isEmpty : false,
             ),
             // ValueListenablePasswordField(
             //     controller: _password,

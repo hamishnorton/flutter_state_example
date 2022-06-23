@@ -11,8 +11,16 @@ import 'package:flutter_state_example/riverpod/riverpod.dart';
 import 'package:provider/provider.dart' as provider;
 
 import 'on_changed_form/on_changed_screen.dart';
+import 'on_changed_value_form/on_changed_value_screen.dart';
 
-enum StateSystem { form, cubit, provider, riverPod }
+enum StateSystem {
+  form,
+  onChangedFormFields,
+  onChangedValueListenableFormFields,
+  cubit,
+  provider,
+  riverPod
+}
 
 void main() {
   const value = String.fromEnvironment('FSE_TYPE');
@@ -24,8 +32,8 @@ void main() {
 
   switch (stateSystem) {
     case StateSystem.form:
-      runApp(App(stateSystem: stateSystem));
-      break;
+    case StateSystem.onChangedFormFields:
+    case StateSystem.onChangedValueListenableFormFields:
     case StateSystem.cubit:
       runApp(App(stateSystem: stateSystem));
       break;
@@ -55,14 +63,23 @@ class App extends StatelessWidget {
     switch (stateSystem) {
       case StateSystem.form:
         home = const FormStateScreen();
+        break;
+
+      case StateSystem.onChangedFormFields:
         home = const OnChangedScreen();
         break;
+
+      case StateSystem.onChangedValueListenableFormFields:
+        home = const OnChangedValueScreen();
+        break;
+
       case StateSystem.cubit:
         home = BlocProvider<FormCubit>(
           create: (BuildContext context) => FormCubit(),
           child: const CubitScreen(),
         );
         break;
+
       case StateSystem.provider:
         home = provider.ChangeNotifierProvider(
             create: (_) => FormProvider(), child: const ProviderScreen());

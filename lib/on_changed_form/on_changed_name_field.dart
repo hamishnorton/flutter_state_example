@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/on_changed_form/base_text_on_changed_field.dart';
+import 'package:flutter_state_example/on_changed_form/base_text_field.dart';
 import 'package:flutter_state_example/common/validator.dart';
 
-class OnChangedEmailField extends StatelessWidget {
-  const OnChangedEmailField({
+class OnChangedNameField extends StatelessWidget {
+  const OnChangedNameField({
     Key? key,
     this.initialValue = '',
     required this.label,
@@ -19,22 +19,22 @@ class OnChangedEmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('EmailOnchangedField.build()');
+    debugPrint('OnchangedNameField.build()');
 
-    return BaseTextOnChangedField(
-      hintText: 'name@domain.com',
+    return BaseTextField(
+      hintText: 'firstname surname',
       initialValue: initialValue,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9@.]'))
+        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z\s-' ']'))
       ],
-      keyboardType: TextInputType.emailAddress,
       label: label,
+      keyboardType: TextInputType.name,
       onChanged: onChanged,
       validationEnabled: validationEnabled,
       validator: (value) {
         debugPrint(
-            'OnChangedEmailField.BaseTestOnChangedField.validator(value: $value)');
-        return Validator.isEmail(value);
+            'OnChangedNameField.BaseTestOnChangedField.validator(value: $value)');
+        return Validator.isName(value);
       },
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_example/form/app_form.dart';
+import 'package:flutter_state_example/common/app_form.dart';
 import 'package:flutter_state_example/form/widgets/value_listenable_email_field.dart';
 import 'package:flutter_state_example/form/widgets/value_listenable_name_field.dart';
 import 'package:flutter_state_example/form/widgets/value_listenable_password_field.dart';
@@ -70,12 +70,17 @@ class _FormStateFormState extends State<FormStateForm> {
             ValueListenableEmailField(
               controller: _emailController,
               label: 'EmailValueListenableField',
-              validationEnabled: state.submitted,
+              //validationEnabled: state.submitted,
+              validationEnabled:
+                  (state.submitted) ? _phoneController.text.isEmpty : false,
             ),
             ValueListenablePhoneField(
-                controller: _phoneController,
-                label: 'Phone',
-                validationEnabled: state.submitted),
+              controller: _phoneController,
+              label: 'Phone',
+              //validationEnabled: state.submitted),
+              validationEnabled:
+                  (state.submitted) ? _emailController.text.isEmpty : false,
+            ),
             ValueListenablePasswordField(
                 controller: _passwordController,
                 label: 'Password',

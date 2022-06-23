@@ -23,6 +23,24 @@
 			],
 		},
 		{
+			"name": "OnChangedFormFields",
+			"request": "launch",
+			"type": "dart",
+			"toolArgs": [
+				"--dart-define",
+				"FSE_TYPE=onChangedFormFields",
+			],
+		},
+		{
+			"name": "onChangedValueListenableFormFields",
+			"request": "launch",
+			"type": "dart",
+			"toolArgs": [
+				"--dart-define",
+				"FSE_TYPE=onChangedValueListenableFormFields",
+			],
+		},
+		{
 			"name": "Provider",
 			"request": "launch",
 			"type": "dart",

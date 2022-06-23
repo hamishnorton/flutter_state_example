@@ -25,6 +25,7 @@ class AppFormState extends State<AppForm> {
 
   bool validate() {
     debugPrint('AppFormState.validate()');
+    //TODO: doesn't run the widget.validate
     return _formKey.currentState!.validate();
   }
 

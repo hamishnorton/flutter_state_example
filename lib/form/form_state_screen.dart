@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_example/form/app_form.dart';
+import 'package:flutter_state_example/common/app_form.dart';
 import 'package:flutter_state_example/form/form_state_form.dart';
 
 class FormStateScreen extends StatefulWidget {

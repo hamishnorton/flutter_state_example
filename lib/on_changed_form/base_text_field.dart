@@ -4,8 +4,8 @@ import 'package:flutter_state_example/theme/theme.dart';
 
 /// Stateful TextFormField requiring an intialValue, and onChanged().
 /// identical to BaseTextFormField, but uses initialValue, and onChanged().
-class BaseTextOnChangedField extends StatefulWidget {
-  const BaseTextOnChangedField({
+class BaseTextField extends StatefulWidget {
+  const BaseTextField({
     Key? key,
     this.initialValue = '',
     required this.onChanged,
@@ -27,10 +27,10 @@ class BaseTextOnChangedField extends StatefulWidget {
   final FormFieldValidator? validator;
 
   @override
-  State<BaseTextOnChangedField> createState() => _BaseTextOnChangedFieldState();
+  State<BaseTextField> createState() => _BaseTextFieldState();
 }
 
-class _BaseTextOnChangedFieldState extends State<BaseTextOnChangedField> {
+class _BaseTextFieldState extends State<BaseTextField> {
   late String _value;
 
   @override
@@ -40,43 +40,40 @@ class _BaseTextOnChangedFieldState extends State<BaseTextOnChangedField> {
   }
 
   String? _validate(String? value) {
-    debugPrint('BaseTextOnChangedField._validate(value: $value)');
+    debugPrint('BaseTextField._validate(value: $value)');
     if (widget.validator == null) return null;
 
     return widget.validator!(value);
   }
 
   String? get _errorText {
-    debugPrint('BaseTextOnChangedField._errorText');
+    debugPrint('BaseTextField._errorText');
     if (!widget.validationEnabled) return null;
-
+    debugPrint(
+        'BaseTextOCField._errorText validationEnabled: ${widget.validationEnabled}');
     return _validate(_value);
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('BaseTextOnChangeField.build()');
+    debugPrint('BaseTextField.build()');
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         initialValue: widget.initialValue,
         onChanged: (text) {
-          debugPrint(
-              'BaseTextOnChangedField.TextFormField.onChanged(text: $text)');
-          //Thought: Could we only fire this if the value is valid?
-          if (widget.validator != null) {
-            final String? validationMessage = widget.validator!(text);
-            debugPrint(
-                'BaseTextOnChangedField.TextFormField.onChanged() validationMessage: $validationMessage');
-            final bool isValid = (validationMessage == null);
-            debugPrint(
-                'BaseTextOnChangedField.TextFormField.onChanged() isValid: $isValid');
-            if (!isValid) return;
+          debugPrint('BaseTextField.TextFormField.onChanged(text: $text)');
+
+          if (widget.validator == null) {
+            widget.onChanged(text);
+          } else if (widget.validator!(text) != null) {
+            widget.onChanged(text);
           }
-          widget.onChanged(text);
+
           setState(() {
             _value = text;
+            // must be set to the _errorText has a new value to use
           });
         },
         validator: (value) {
