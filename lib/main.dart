@@ -5,22 +5,13 @@ import 'package:flutter_state_example/cubit/cubit/form_cubit.dart';
 import 'package:flutter_state_example/cubit/cubit_screen.dart';
 import 'package:flutter_state_example/extensions/extensions.dart';
 import 'package:flutter_state_example/form/form_state_screen.dart';
+import 'package:flutter_state_example/on_changed_form/on_changed_screen.dart';
 import 'package:flutter_state_example/provider/form_provider.dart';
 import 'package:flutter_state_example/provider/provider_screen.dart';
 import 'package:flutter_state_example/riverpod/riverpod.dart';
 import 'package:provider/provider.dart' as provider;
 
-import 'on_changed_form/on_changed_screen.dart';
-import 'on_changed_value_form/on_changed_value_screen.dart';
-
-enum StateSystem {
-  form,
-  onChangedFormFields,
-  onChangedValueListenableFormFields,
-  cubit,
-  provider,
-  riverPod
-}
+enum StateSystem { form, onChangedFormFields, cubit, provider, riverPod }
 
 void main() {
   const value = String.fromEnvironment('FSE_TYPE');
@@ -33,7 +24,7 @@ void main() {
   switch (stateSystem) {
     case StateSystem.form:
     case StateSystem.onChangedFormFields:
-    case StateSystem.onChangedValueListenableFormFields:
+
     case StateSystem.cubit:
       runApp(App(stateSystem: stateSystem));
       break;
@@ -67,10 +58,6 @@ class App extends StatelessWidget {
 
       case StateSystem.onChangedFormFields:
         home = const OnChangedScreen();
-        break;
-
-      case StateSystem.onChangedValueListenableFormFields:
-        home = const OnChangedValueScreen();
         break;
 
       case StateSystem.cubit:

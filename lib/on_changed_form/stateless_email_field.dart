@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_state_example/common/validator.dart';
+import 'package:flutter_state_example/on_changed_form/base_stateless_text_field.dart';
 
-import 'base_stateful_text_field.dart';
-
-class EmailField extends StatelessWidget {
-  const EmailField({
+class StatelessEmailField extends StatelessWidget {
+  const StatelessEmailField({
     Key? key,
     this.initialValue = '',
     required this.label,
@@ -27,8 +26,9 @@ class EmailField extends StatelessWidget {
     debugPrint('validationEnabled: $isValidationEnabled');
     debugPrint('initialValue: $initialValue');
 
-    return BaseStatefulTextField(
-      //stateKey: stateKey,
+    return BaseStatelessTextField(
+      //return BaseStatefulTextField(
+      stateKey: stateKey,
       hintText: 'name@domain.com',
       initialValue: initialValue,
       inputFormatters: [

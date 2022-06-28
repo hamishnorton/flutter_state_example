@@ -32,15 +32,6 @@
 			],
 		},
 		{
-			"name": "onChangedValueListenableFormFields",
-			"request": "launch",
-			"type": "dart",
-			"toolArgs": [
-				"--dart-define",
-				"FSE_TYPE=onChangedValueListenableFormFields",
-			],
-		},
-		{
 			"name": "Provider",
 			"request": "launch",
 			"type": "dart",

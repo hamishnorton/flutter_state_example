@@ -19,18 +19,18 @@ class AppFormState extends State<AppForm> {
 
   bool _submitted = false;
   bool get submitted {
-    debugPrint('AppFormState.submitted: $_submitted');
+    //debugPrint('AppFormState.submitted: $_submitted');
     return _submitted;
   }
 
   bool validate() {
-    debugPrint('AppFormState.validate()');
+    //('AppFormState.validate()');
     //TODO: doesn't run the widget.validate
     return _formKey.currentState!.validate();
   }
 
   bool submit() {
-    debugPrint('AppFormState.submit()');
+    //debugPrint('AppFormState.submit()');
     final isValid = (widget.validate != null)
         ? validate() && widget.validate!()
         : validate();
@@ -44,7 +44,7 @@ class AppFormState extends State<AppForm> {
 
   @override
   Widget build(final BuildContext context) {
-    debugPrint('AppFormState.build()');
+    //debugPrint('AppFormState.build()');
     return Form(
       key: _formKey,
       child: widget.builder(this),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_state_example/common/validator.dart';
+import 'package:flutter_state_example/on_changed_form/base_stateless_text_field.dart';
 
-import 'base_stateful_text_field.dart';
-
-class EmailField extends StatelessWidget {
-  const EmailField({
+class StatelessNameField extends StatelessWidget {
+  const StatelessNameField({
     Key? key,
     this.initialValue = '',
     required this.label,
@@ -22,28 +21,29 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('EmailField.build()');
+    debugPrint('NameField.build()');
     debugPrint('label: $label');
     debugPrint('validationEnabled: $isValidationEnabled');
     debugPrint('initialValue: $initialValue');
 
-    return BaseStatefulTextField(
-      //stateKey: stateKey,
-      hintText: 'name@domain.com',
+    return BaseStatelessTextField(
+      //return BaseStatefulTextField(
+      stateKey: stateKey,
+      hintText: 'firstname surname',
       initialValue: initialValue,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9@.]'))
+        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z-' ']'))
       ],
       keyboardType: TextInputType.emailAddress,
       label: label,
       onChanged: (value) {
-        debugPrint('EmailField.onchanged(value: $value)');
+        debugPrint('NameField.onchanged(value: $value)');
         onChanged(value);
       },
       isValidationEnabled: isValidationEnabled,
       validator: (value) {
-        debugPrint('EmailField.BaseTextField.validator(value: $value)');
-        return Validator.isEmail(value);
+        debugPrint('NameField.BaseTextField.validator(value: $value)');
+        return Validator.isName(value);
       },
     );
   }

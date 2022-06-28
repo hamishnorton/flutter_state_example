@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_example/common/app_form.dart';
 
 import 'email_field.dart';
+import 'name_field.dart';
 import 'phone_field.dart';
 
 class OnChangedForm extends StatefulWidget {
@@ -14,15 +15,17 @@ class OnChangedForm extends StatefulWidget {
 }
 
 class _OnChangedFormState extends State<OnChangedForm> {
-  final String _name = '';
+  String _name = '';
   String _email = '';
+  final String _email2 = '';
   String _phone = '';
   // final String _password = '';
 
   void _save(AppFormState state) {
     debugPrint('OnChangedForm._save()');
     debugPrint('_name: $_name');
-    debugPrint('OnChangedForm._save() _email: $_email');
+    debugPrint('_email: $_email');
+    debugPrint('_email2: $_email2');
     debugPrint('_phone: $_phone');
     // debugPrint('_password: $_password');
   }
@@ -56,47 +59,49 @@ class _OnChangedFormState extends State<OnChangedForm> {
         builder: (state) {
           debugPrint('OnChangedForm.build().AppForm.builder()');
           return Column(children: [
-            // OnChangedNameField(
-            //   initialValue: _name,
-            //   label: 'Name',
-            //   onChanged: (newValue) {
-            //     //no setState((){}) requried as that happens in the field
-            //     _name = newValue;
-            //   },
-            //   validationEnabled: state.submitted,
-            // ),
-            EmailField(
-              initialValue: _email,
-              label: 'EmailField',
+            Text('email: $_name'),
+            Text('email: $_email'),
+            Text('email2: $_email2'),
+            Text('phone: $_phone'),
+            NameField(
+              initialValue: _name,
+              label: 'Name',
               onChanged: (newValue) {
-                debugPrint(
-                    'OnChangedForm.OnChangedEmailField.onChanged(newValue: $newValue)');
+                //no setState((){}) requried as that happens in the field
 
-                setState(() {
-                  // required to update validation of the PhoneField
+                _name = newValue;
+              },
+              isValidationEnabled: state.submitted,
+            ),
+            EmailField(
+                //key: const ValueKey('EmailField'),
+                initialValue: _email,
+                label: 'EmailField',
+                onChanged: (newValue) {
+                  debugPrint(
+                      'OnChangedForm.EmailField-1.onChanged(newValue: $newValue)');
+
                   _email = newValue;
-                });
-              },
-              // validationEnabled: state.submitted
-              validationEnabled: (state.submitted) ? _phone.isEmpty : false,
-            ),
+                },
+                isValidationEnabled: state.submitted
+                //isValidationEnabled: (state.submitted) ? _phone.isEmpty : false,
+                ),
             PhoneField(
-              initialValue: _phone,
-              label: 'Phone',
-              onChanged: (newValue) {
-                debugPrint(
-                    'OnChangedForm.OnChangedPhoneField.onChanged(newValue: $newValue)');
-                setState(() {
-                  _phone = newValue;
-                });
-              },
-              //validationEnabled: state.submitted,
-              validationEnabled: (state.submitted) ? _email.isEmpty : false,
-            ),
-            // ValueListenablePasswordField(
-            //     controller: _password,
-            //     label: 'Password',
-            //     validationEnabled: state.submitted),
+                //key: const ValueKey('PhoneField'),
+                initialValue: _phone,
+                label: 'PhoneField',
+                onChanged: (newValue) {
+                  debugPrint(
+                      'OnChangedForm.PhoneField.onChanged(newValue: $newValue)');
+
+                  setState(() {
+                    // required to update validation of the PhoneField
+                    _phone = newValue;
+                  });
+                },
+                isValidationEnabled: state.submitted
+                //isValidationEnabled: (state.submitted) ? _phone.isEmpty : false,
+                ),
           ]);
         });
   }

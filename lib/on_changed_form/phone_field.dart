@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_state_example/common/validator.dart';
 
-import 'base_text_field.dart';
+import 'base_stateful_text_field.dart';
 
 class PhoneField extends StatelessWidget {
   const PhoneField({
@@ -11,20 +11,22 @@ class PhoneField extends StatelessWidget {
     this.initialValue = '',
     required this.label,
     required this.onChanged,
-    required this.validationEnabled,
+    required this.isValidationEnabled,
   }) : super(key: key);
 
   final String initialValue;
   final String label;
   final Function(String) onChanged;
-  final bool validationEnabled;
+  final bool isValidationEnabled;
 
   @override
   Widget build(BuildContext context) {
     debugPrint('PhoneField.build()');
-    debugPrint('PhoneField.build() validationEnabled: $validationEnabled');
+    debugPrint('label: $label');
+    debugPrint('validationEnabled: $isValidationEnabled');
+    debugPrint('initialValue: $initialValue');
 
-    return BaseTextField(
+    return BaseStatefulTextField(
       hintText: '+64 21 123 456',
       initialValue: initialValue,
       inputFormatters: [
@@ -33,7 +35,7 @@ class PhoneField extends StatelessWidget {
       label: label,
       keyboardType: TextInputType.phone,
       onChanged: onChanged,
-      validationEnabled: validationEnabled,
+      isValidationEnabled: isValidationEnabled,
       validator: (value) {
         debugPrint('PhoneField.BaseTextField.validator(value: $value)');
         return Validator.isPhone(value);

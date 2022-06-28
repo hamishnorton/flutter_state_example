@@ -4,8 +4,8 @@ import 'package:flutter_state_example/theme/theme.dart';
 
 /// Stateful TextFormField requiring an intialValue, and onChanged().
 /// identical to BaseTextFormField, but uses initialValue, and onChanged().
-class BaseTextField extends StatefulWidget {
-  const BaseTextField({
+class BaseStatefulTextField extends StatefulWidget {
+  const BaseStatefulTextField({
     Key? key,
     this.initialValue = '',
     required this.onChanged,
@@ -13,7 +13,7 @@ class BaseTextField extends StatefulWidget {
     this.inputFormatters,
     this.keyboardType = TextInputType.text,
     required this.label,
-    this.validationEnabled = true,
+    this.isValidationEnabled = true,
     this.validator,
   }) : super(key: key);
 
@@ -23,14 +23,14 @@ class BaseTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final String label;
   final Function(String) onChanged;
-  final bool validationEnabled;
+  final bool isValidationEnabled;
   final FormFieldValidator? validator;
 
   @override
-  State<BaseTextField> createState() => _BaseTextFieldState();
+  State<BaseStatefulTextField> createState() => _BaseStatefulTextFieldState();
 }
 
-class _BaseTextFieldState extends State<BaseTextField> {
+class _BaseStatefulTextFieldState extends State<BaseStatefulTextField> {
   late String _value;
 
   @override
@@ -48,9 +48,9 @@ class _BaseTextFieldState extends State<BaseTextField> {
 
   String? get _errorText {
     debugPrint('BaseTextField._errorText');
-    if (!widget.validationEnabled) return null;
+    if (!widget.isValidationEnabled) return null;
     debugPrint(
-        'BaseTextOCField._errorText validationEnabled: ${widget.validationEnabled}');
+        'BaseTextOCField._errorText validationEnabled: ${widget.isValidationEnabled}');
     return _validate(_value);
   }
 
@@ -67,8 +67,10 @@ class _BaseTextFieldState extends State<BaseTextField> {
 
           if (widget.validator == null) {
             widget.onChanged(text);
-          } else if (widget.validator!(text) != null) {
+          } else if (widget.validator!(text) == null) {
             widget.onChanged(text);
+          } else {
+            widget.onChanged('');
           }
 
           setState(() {
@@ -79,7 +81,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
         validator: (value) {
           return _validate(value);
         },
-        autovalidateMode: widget.validationEnabled
+        autovalidateMode: widget.isValidationEnabled
             ? AutovalidateMode.onUserInteraction
             : AutovalidateMode.disabled,
         decoration: Styles.buildInputDecoration(

@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_state_example/common/validator.dart';
 
-import 'base_stateful_text_field.dart';
+import 'base_stateless_text_field.dart';
 
-class EmailField extends StatelessWidget {
-  const EmailField({
+class StatelessPhoneField extends StatelessWidget {
+  const StatelessPhoneField({
     Key? key,
     this.initialValue = '',
     required this.label,
     required this.onChanged,
     required this.isValidationEnabled,
-    this.stateKey,
   }) : super(key: key);
 
-  final Key? stateKey;
   final String initialValue;
   final String label;
   final Function(String) onChanged;
@@ -22,28 +21,24 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('EmailField.build()');
+    debugPrint('PhoneField.build()');
     debugPrint('label: $label');
     debugPrint('validationEnabled: $isValidationEnabled');
     debugPrint('initialValue: $initialValue');
 
-    return BaseStatefulTextField(
-      //stateKey: stateKey,
-      hintText: 'name@domain.com',
+    return BaseStatelessTextField(
+      hintText: '+64 21 123 456',
       initialValue: initialValue,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9@.]'))
+        FilteringTextInputFormatter.allow(RegExp(r'[\d+()-\s]'))
       ],
-      keyboardType: TextInputType.emailAddress,
       label: label,
-      onChanged: (value) {
-        debugPrint('EmailField.onchanged(value: $value)');
-        onChanged(value);
-      },
+      keyboardType: TextInputType.phone,
+      onChanged: onChanged,
       isValidationEnabled: isValidationEnabled,
       validator: (value) {
-        debugPrint('EmailField.BaseTextField.validator(value: $value)');
-        return Validator.isEmail(value);
+        debugPrint('PhoneField.BaseTextField.validator(value: $value)');
+        return Validator.isPhone(value);
       },
     );
   }
