@@ -17,7 +17,6 @@ class OnChangedForm extends StatefulWidget {
 class _OnChangedFormState extends State<OnChangedForm> {
   String _name = '';
   String _email = '';
-  final String _email2 = '';
   String _phone = '';
   // final String _password = '';
 
@@ -25,7 +24,6 @@ class _OnChangedFormState extends State<OnChangedForm> {
     debugPrint('OnChangedForm._save()');
     debugPrint('_name: $_name');
     debugPrint('_email: $_email');
-    debugPrint('_email2: $_email2');
     debugPrint('_phone: $_phone');
     // debugPrint('_password: $_password');
   }
@@ -33,8 +31,8 @@ class _OnChangedFormState extends State<OnChangedForm> {
   bool _validate() {
     // Add inter field validation here
     debugPrint('OnChangedForm._validate()');
-    //TODO: Add form validation message
-    return true;
+
+    return (_email.isNotEmpty || _phone.isEmpty);
   }
 
   @override
@@ -61,7 +59,6 @@ class _OnChangedFormState extends State<OnChangedForm> {
           return Column(children: [
             Text('email: $_name'),
             Text('email: $_email'),
-            Text('email2: $_email2'),
             Text('phone: $_phone'),
             NameField(
               initialValue: _name,
@@ -74,34 +71,39 @@ class _OnChangedFormState extends State<OnChangedForm> {
               isValidationEnabled: state.submitted,
             ),
             EmailField(
-                //key: const ValueKey('EmailField'),
-                initialValue: _email,
-                label: 'EmailField',
-                onChanged: (newValue) {
-                  debugPrint(
-                      'OnChangedForm.EmailField-1.onChanged(newValue: $newValue)');
+              //key: const ValueKey('EmailField'),
+              initialValue: _email,
+              label: 'EmailField',
+              onChanged: (newValue) {
+                debugPrint(
+                    'OnChangedForm.EmailField-1.onChanged(newValue: $newValue)');
 
+                setState(() {
+                  // required to update validation on EmailFeild
                   _email = newValue;
-                },
-                isValidationEnabled: state.submitted
-                //isValidationEnabled: (state.submitted) ? _phone.isEmpty : false,
-                ),
+                });
+              },
+              //isValidationEnabled: state.submitted
+              //isValidationEnabled: (state.submitted) ? _phone.isEmpty : false,
+              isValidationEnabled: _phone.isEmpty,
+            ),
             PhoneField(
-                //key: const ValueKey('PhoneField'),
-                initialValue: _phone,
-                label: 'PhoneField',
-                onChanged: (newValue) {
-                  debugPrint(
-                      'OnChangedForm.PhoneField.onChanged(newValue: $newValue)');
+              //key: const ValueKey('PhoneField'),
+              initialValue: _phone,
+              label: 'PhoneField',
+              onChanged: (newValue) {
+                debugPrint(
+                    'OnChangedForm.PhoneField.onChanged(newValue: $newValue)');
 
-                  setState(() {
-                    // required to update validation of the PhoneField
-                    _phone = newValue;
-                  });
-                },
-                isValidationEnabled: state.submitted
-                //isValidationEnabled: (state.submitted) ? _phone.isEmpty : false,
-                ),
+                setState(() {
+                  // required to update validation on the PhoneField
+                  _phone = newValue;
+                });
+              },
+              //isValidationEnabled: state.submitted
+              //isValidationEnabled: (state.submitted) ? _email.isEmpty : false,
+              isValidationEnabled: _email.isEmpty,
+            ),
           ]);
         });
   }

@@ -50,13 +50,16 @@ class _BaseStatefulTextFieldState extends State<BaseStatefulTextField> {
     debugPrint('BaseTextField._errorText');
     if (!widget.isValidationEnabled) return null;
     debugPrint(
-        'BaseTextOCField._errorText validationEnabled: ${widget.isValidationEnabled}');
+        '_errorText validationEnabled: ${widget.isValidationEnabled}');
     return _validate(_value);
   }
 
   @override
   Widget build(BuildContext context) {
     debugPrint('BaseTextField.build()');
+    debugPrint('label: ${widget.label}');
+    debugPrint('validationEnabled: ${widget.isValidationEnabled}');
+    debugPrint('initialValue: ${widget.initialValue}');
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -81,6 +84,7 @@ class _BaseStatefulTextFieldState extends State<BaseStatefulTextField> {
         validator: (value) {
           return _validate(value);
         },
+        //Thought: could we always run the validator, and only if not null to we check to see...
         autovalidateMode: widget.isValidationEnabled
             ? AutovalidateMode.onUserInteraction
             : AutovalidateMode.disabled,
