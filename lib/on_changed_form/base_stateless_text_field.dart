@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_state_example/theme/theme.dart';
 
-/// Stateless TextFormField requiring an intialValue, and onChanged().
-/// Requires setState((){}) to be included in it's onChanged
-/// Doesn't work as a pair on the same value
+/// Don't use this!
+/// Requires setState((){}) to be included in the onChanged callback
+/// note: Doesn't work as a pair on the same value, might need a ValueKey()
 class BaseStatelessTextField extends StatelessWidget {
   const BaseStatelessTextField({
     Key? key,
