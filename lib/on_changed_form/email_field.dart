@@ -22,10 +22,10 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('EmailField.build()');
-    debugPrint('label: $label');
-    debugPrint('validationEnabled: $isValidationEnabled');
-    debugPrint('initialValue: $initialValue');
+    // debugPrint('EmailField.build()');
+    // debugPrint('label: $label');
+    // debugPrint('validationEnabled: $isValidationEnabled');
+    // debugPrint('initialValue: $initialValue');
 
     return BaseStatefulTextField(
       //stateKey: stateKey,
@@ -37,12 +37,12 @@ class EmailField extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       label: label,
       onChanged: (value) {
-        debugPrint('EmailField.onchanged(value: $value)');
+        // debugPrint('EmailField.onchanged(value: $value)');
         onChanged(value);
       },
       isValidationEnabled: isValidationEnabled,
       validator: (value) {
-        debugPrint('EmailField.BaseTextField.validator(value: $value)');
+        // debugPrint('EmailField.BaseTextField.validator(value: $value)');
         return Validator.isEmail(value);
       },
     );

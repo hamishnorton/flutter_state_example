@@ -24,27 +24,28 @@ class AppFormState extends State<AppForm> {
   }
 
   bool validate() {
-    //('AppFormState.validate()');
-    //TODO: doesn't run the widget.validate
+    // debugPrint('AppFormState.validate()');
     return _formKey.currentState!.validate();
   }
 
   bool submit() {
-    //debugPrint('AppFormState.submit()');
-    final isValid = (widget.validate != null)
-        ? validate() && widget.validate!()
+    // debugPrint('AppFormState.submit()');
+    final isValid = (widget.validate != null) // if form validator provided
+        ? validate() && widget.validate!() // run it
         : validate();
+
     if (isValid) widget.onSaved(this);
 
     setState(() {
       _submitted = true;
     });
+
     return isValid;
   }
 
   @override
   Widget build(final BuildContext context) {
-    //debugPrint('AppFormState.build()');
+    // debugPrint('AppFormState.build()');
     return Form(
       key: _formKey,
       child: widget.builder(this),

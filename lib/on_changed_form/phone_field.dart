@@ -21,10 +21,10 @@ class PhoneField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('PhoneField.build()');
-    debugPrint('label: $label');
-    debugPrint('validationEnabled: $isValidationEnabled');
-    debugPrint('initialValue: $initialValue');
+    // debugPrint('PhoneField.build()');
+    // debugPrint('label: $label');
+    // debugPrint('validationEnabled: $isValidationEnabled');
+    // debugPrint('initialValue: $initialValue');
 
     return BaseStatefulTextField(
       hintText: '+64 21 123 456',
@@ -37,7 +37,7 @@ class PhoneField extends StatelessWidget {
       onChanged: onChanged,
       isValidationEnabled: isValidationEnabled,
       validator: (value) {
-        debugPrint('PhoneField.BaseTextField.validator(value: $value)');
+        // debugPrint('PhoneField.BaseTextField.validator(value: $value)');
         return Validator.isPhone(value);
       },
     );

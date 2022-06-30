@@ -22,10 +22,10 @@ class NameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('NameField.build()');
-    debugPrint('label: $label');
-    debugPrint('validationEnabled: $isValidationEnabled');
-    debugPrint('initialValue: $initialValue');
+    // debugPrint('NameField.build()');
+    // debugPrint('label: $label');
+    // debugPrint('validationEnabled: $isValidationEnabled');
+    // debugPrint('initialValue: $initialValue');
 
     return BaseStatefulTextField(
       hintText: 'firstname surname',
@@ -36,12 +36,12 @@ class NameField extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       label: label,
       onChanged: (value) {
-        debugPrint('NameField.onchanged(value: $value)');
+        //debugPrint('NameField.onchanged(value: $value)');
         onChanged(value);
       },
       isValidationEnabled: isValidationEnabled,
       validator: (value) {
-        debugPrint('NameField.BaseTextField.validator(value: $value)');
+        //debugPrint('NameField.BaseTextField.validator(value: $value)');
         return Validator.isName(value);
       },
     );

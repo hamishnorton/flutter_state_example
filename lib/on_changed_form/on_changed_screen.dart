@@ -27,8 +27,7 @@ class _OnChangedScreenState extends State<OnChangedScreen> {
   Widget build(BuildContext context) {
     debugPrint('OnChangedScreen.build()');
     return Scaffold(
-      appBar:
-          AppBar(title: const Text('Form with OnChanged Fields')),
+      appBar: AppBar(title: const Text('Form with OnChanged Fields')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -36,10 +35,10 @@ class _OnChangedScreenState extends State<OnChangedScreen> {
             OnChangedForm(formKey: _formKey),
             ElevatedButton(
               onPressed: () {
-                debugPrint('OnChangedScreen.onPressed()');
-                final submitSuccess = _formKey.currentState!.submit();
-                debugPrint(
-                    'OnChangedScreen.onPressed() submitSuccess: $submitSuccess');
+                // debugPrint('OnChangedScreen.onPressed()');
+                if (_formKey.currentState!.submit()) {
+                  // debugPrint('_formKey.currentState!.submit(): true');
+                }
               },
               child: const Text('Submit'),
             ),
