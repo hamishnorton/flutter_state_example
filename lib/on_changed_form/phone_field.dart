@@ -27,6 +27,8 @@ class PhoneField extends StatelessWidget {
     // debugPrint('initialValue: $initialValue');
 
     return BaseStatefulTextField(
+      // _focusNode: FocusNode(),
+      //hadFocus: () {},
       hintText: '+64 21 123 456',
       initialValue: initialValue,
       inputFormatters: [

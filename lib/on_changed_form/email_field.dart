@@ -29,6 +29,8 @@ class EmailField extends StatelessWidget {
 
     return BaseStatefulTextField(
       //stateKey: stateKey,
+      //_focusNode: FocusNode(),
+      //hadFocus: () {},
       hintText: 'name@domain.com',
       initialValue: initialValue,
       inputFormatters: [

@@ -18,7 +18,6 @@ class _OnChangedFormState extends State<OnChangedForm> {
   String _name = '';
   String _email = '';
   String _phone = '';
-  // final String _password = '';
 
   void _save(AppFormState state) {
     debugPrint('OnChangedForm._save()');
@@ -27,12 +26,15 @@ class _OnChangedFormState extends State<OnChangedForm> {
     debugPrint('_phone: $_phone');
   }
 
-  bool _validate() {
-    debugPrint('OnChangedForm._validate()');
+  String? _validator() {
+    debugPrint('OnChangedForm._validator()');
 
     // Add inter field validation here
-    if (_email.isEmpty && _phone.isEmpty) return false;
-    return true;
+    if (_email.isEmpty && _phone.isEmpty) {
+      return 'Either Email or Phone is required';
+    }
+
+    return null;
   }
 
   @override
@@ -53,13 +55,14 @@ class _OnChangedFormState extends State<OnChangedForm> {
         // But only if the submit() is in the same scope and not a parent
         key: widget.formKey,
         onSaved: (state) => _save(state),
-        validate: () => _validate(),
+        validator: () => _validator(),
         builder: (state) {
           debugPrint('OnChangedForm.build().AppForm.builder()');
           return Column(children: [
-            Text('email: $_name'),
+            Text('name: $_name'),
             Text('email: $_email'),
             Text('phone: $_phone'),
+            const Text('^above only changes on a setState() of the form'),
             NameField(
               initialValue: _name,
               label: 'Name',
@@ -73,7 +76,7 @@ class _OnChangedFormState extends State<OnChangedForm> {
               initialValue: _email,
               label: 'EmailField',
               onChanged: (newValue) {
-                 setState(() {
+                setState(() {
                   // required to update validation on EmailFeild
                   _email = newValue;
                 });
@@ -84,13 +87,22 @@ class _OnChangedFormState extends State<OnChangedForm> {
               initialValue: _phone,
               label: 'PhoneField',
               onChanged: (newValue) {
-                 setState(() {
+                setState(() {
                   // required to update validation on the PhoneField
                   _phone = newValue;
                 });
               },
               isValidationEnabled: (state.submitted) ? _email.isEmpty : false,
             ),
+            if (!state.isValid)
+              Text(
+                state.errorText,
+                // TODO: What is the error text in a MaterialTheme?
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: Colors.red),
+              ),
           ]);
         });
   }

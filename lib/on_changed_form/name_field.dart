@@ -8,6 +8,8 @@ class NameField extends StatelessWidget {
   const NameField({
     Key? key,
     this.initialValue = '',
+    //required this.focusNode,
+    //required this.hadFocus,
     required this.label,
     required this.onChanged,
     required this.isValidationEnabled,
@@ -15,6 +17,8 @@ class NameField extends StatelessWidget {
   }) : super(key: key);
 
   final Key? stateKey;
+  //final FocusNode focusNode;
+  //final Function() hadFocus;
   final String initialValue;
   final String label;
   final Function(String) onChanged;
@@ -28,11 +32,14 @@ class NameField extends StatelessWidget {
     // debugPrint('initialValue: $initialValue');
 
     return BaseStatefulTextField(
+      //_focusNode: focusNode,
+      //hadFocus: hadFocus,
       hintText: 'firstname surname',
       initialValue: initialValue,
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z-' ']'))
       ],
+      isRequired: true,
       keyboardType: TextInputType.emailAddress,
       label: label,
       onChanged: (value) {

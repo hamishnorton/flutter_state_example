@@ -1,14 +1,17 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class AppForm extends StatefulWidget {
   const AppForm(
-      {Key? key, required this.builder, required this.onSaved, this.validate})
+      {Key? key, required this.builder, required this.onSaved, this.validator})
       : super(key: key);
 
-  final Widget Function(AppFormState state) builder;
-  final void Function(AppFormState state) onSaved;
-  // TODO: Add a form specific validation message
-  final bool Function()? validate;
+  final Widget Function(AppFormState state)
+      builder; // TODO: why is this a builder? Comment
+  final void Function(AppFormState state)
+      onSaved; // TODO: check if state is needed
+
+  // Note: Allows null to be similar to Field Validators
+  final String? Function()? validator;
 
   @override
   State<AppForm> createState() => AppFormState();
@@ -19,25 +22,33 @@ class AppFormState extends State<AppForm> {
 
   bool _submitted = false;
   bool get submitted {
-    //debugPrint('AppFormState.submitted: $_submitted');
+    debugPrint('AppFormState.submitted: $_submitted');
     return _submitted;
   }
 
-  bool validate() {
-    // debugPrint('AppFormState.validate()');
-    return _formKey.currentState!.validate();
+  bool get isValid {
+    final bool areFieldsValid = (_formKey.currentState != null)
+        ? _formKey.currentState!.validate()
+        : true;
+
+    final bool isFormValid =
+        (widget.validator != null) ? (widget.validator!() ?? '').isEmpty : true;
+    return (areFieldsValid && isFormValid);
+  }
+
+  String get errorText {
+    if (!submitted) return '';
+    if (widget.validator == null) return '';
+    return widget.validator!() ?? '';
   }
 
   bool submit() {
-    // debugPrint('AppFormState.submit()');
-    final isValid = (widget.validate != null) // if form validator provided
-        ? validate() && widget.validate!() // run it
-        : validate();
-
-    if (isValid) widget.onSaved(this);
-
+    debugPrint('AppFormState.submit()');
     setState(() {
       _submitted = true;
+      if (isValid) {
+        widget.onSaved(this);
+      }
     });
 
     return isValid;
@@ -45,7 +56,7 @@ class AppFormState extends State<AppForm> {
 
   @override
   Widget build(final BuildContext context) {
-    // debugPrint('AppFormState.build()');
+    debugPrint('AppFormState.build()');
     return Form(
       key: _formKey,
       child: widget.builder(this),

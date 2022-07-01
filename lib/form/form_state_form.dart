@@ -29,11 +29,12 @@ class _FormStateFormState extends State<FormStateForm> {
     debugPrint('_passwordController.text: ${_passwordController.text}');
   }
 
-  bool _validate() {
-    // Add inter field validation here
+  String? _validate() {
     debugPrint('FormStateForm._validate()');
-    //TODO: Add form validation message
-    return true;
+    // Add inter field validation here
+    // And return a validation message
+
+    return '';
   }
 
   @override
@@ -58,7 +59,7 @@ class _FormStateFormState extends State<FormStateForm> {
             .formKey, //Thought: Could the form supply itself with one if it's not provided?
         // Only if the submit() is havving in the same scope and not in the screen above
         onSaved: (state) => _save(state),
-        validate: () => _validate(),
+        validator: () => _validate(),
         builder: (state) {
           debugPrint('AppForm.builder:');
           return Column(children: [

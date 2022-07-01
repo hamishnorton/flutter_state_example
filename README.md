@@ -8,6 +8,7 @@ A very basic flutter app that shows various methods of state management used wit
   - includes: activating validation after initial submit
 - OnChangedFormFields
   - uses only fiels with `initialValue` and `onChanged()`
+  - includes: interfield validation
 - [Provider](https://pub.dev/packages/provider) 
   - includes: activating validation after initial submit
 - [Cubit (bloc)](https://bloclibrary.dev/)
