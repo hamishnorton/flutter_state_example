@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 
 /// Stateless TextField using ValueListenableBuilder, and requiring a TextEditingController.
 /// based on: https://codewithandrea.com/articles/flutter-text-field-form-validation/

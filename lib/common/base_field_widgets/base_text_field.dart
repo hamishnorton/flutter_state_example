@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 // for FilteringTextInputFormatter
 
 class BaseTextField extends StatelessWidget {

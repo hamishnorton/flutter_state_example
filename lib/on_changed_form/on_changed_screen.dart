@@ -32,12 +32,18 @@ class _OnChangedScreenState extends State<OnChangedScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
-            OnChangedForm(formKey: _formKey),
+            OnChangedForm(
+                formKey: _formKey,
+                onSubmit: (formModel) {
+                  debugPrint('formModel.name: ${formModel.name}');
+                  debugPrint('formModel.email: ${formModel.email}');
+                  debugPrint('formModel.phone: ${formModel.phone}');
+                }),
             ElevatedButton(
               onPressed: () {
-                // debugPrint('OnChangedScreen.onPressed()');
+                debugPrint('OnChangedScreen.onPressed()');
                 if (_formKey.currentState!.submit()) {
-                  // debugPrint('_formKey.currentState!.submit(): true');
+                  debugPrint('_formKey.currentState!.submit(): true');
                 }
               },
               child: const Text('Submit'),

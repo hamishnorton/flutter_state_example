@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 
 /// Stateful TextFormField requiring a controller.
 /// Has to be stateful so the errorText is updated

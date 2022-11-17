@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 
 /// Stateful TextFormField requiring an intialValue, and onChanged().
 class BaseStatefulTextField extends StatefulWidget {
@@ -44,7 +44,7 @@ class _BaseStatefulTextFieldState extends State<BaseStatefulTextField> {
   @override
   initState() {
     super.initState();
-    debugPrint('BaseStatefulTextField.initState');
+    // debugPrint('BaseStatefulTextField.initState');
 
     _label = (widget.isRequired) ? '${widget.label}*' : widget.label;
     _focusNode = FocusNode(
@@ -73,9 +73,9 @@ class _BaseStatefulTextFieldState extends State<BaseStatefulTextField> {
   }
 
   void _focusNodeListener() {
-    debugPrint('focusNode.listener');
-    debugPrint('.hasFocus: ${_focusNode.hasFocus}');
-    debugPrint('.hasPrimaryFocus: ${_focusNode.hasPrimaryFocus}');
+    // debugPrint('focusNode.listener');
+    // debugPrint('.hasFocus: ${_focusNode.hasFocus}');
+    // debugPrint('.hasPrimaryFocus: ${_focusNode.hasPrimaryFocus}');
     if (_focusNode.hasPrimaryFocus) {
       _isFocused = true;
     } else {
@@ -87,21 +87,21 @@ class _BaseStatefulTextFieldState extends State<BaseStatefulTextField> {
   }
 
   String? _validate(String? value) {
-    // debugPrint('BaseTextField._validate(value: $value)');
+    debugPrint('BaseTextField._validate(value: $value)');
     if (widget.validator == null) return null;
 
     return widget.validator!(value);
   }
 
   String? get _errorText {
-    debugPrint('BaseTextField._errorText');
+    // debugPrint('BaseTextField._errorText');
     if (!widget.isValidationEnabled && !_hadFocus) return null;
 
     return _validate(_value);
   }
 
   void _onChanged(String value) {
-    //debugPrint('BaseTextField.TextFormField.onChanged(text: $text)');
+    debugPrint('BaseTextField.TextFormField.onChanged(text: $value)');
     if (value == _value) return;
 
     if (widget.validator != null && widget.validator!(value) != null) {
@@ -120,32 +120,38 @@ class _BaseStatefulTextFieldState extends State<BaseStatefulTextField> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('BaseTextField.build()');
+    // debugPrint('BaseTextField.build()');
     // debugPrint('label: ${widget.label}');
     // debugPrint('validationEnabled: ${widget.isValidationEnabled}');
     // debugPrint('initialValue: ${widget.initialValue}');
-    debugPrint('_hadFocus: $_hadFocus');
+    // debugPrint('_hadFocus: $_hadFocus');
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        focusNode: _focusNode,
-        initialValue: widget.initialValue,
-        onChanged: (text) => _onChanged(text),
-        // no validator required as setting the errorText in
-        // the decorator runs the the validation callback
-        // validator: (value) {}
-        // no autovalidateMode required as the errorText is set on every build
-        // autovalidateMode: widget.isValidationEnabled
-        //     ? AutovalidateMode.onUserInteraction
-        //     //? AutovalidateMode.always
-        //     : AutovalidateMode.disabled,
-        decoration:
-            Styles.buildInputDecoration(_errorText, widget.hintText, _label),
-        inputFormatters: widget.inputFormatters,
-        keyboardType: widget.keyboardType,
-        // TODO: investigate when to use it, and expose it.
-        //textInputAction: TextInputAction.done,
+    return Semantics(
+      container: true,
+      label: widget.label,
+      hint: widget.hintText,
+      textField: true,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+          focusNode: _focusNode,
+          initialValue: widget.initialValue,
+          onChanged: (text) => _onChanged(text),
+          // no validator required as setting the errorText in
+          // the decorator runs the the validation callback
+          // validator: (value) {}
+          // no autovalidateMode required as the errorText is set on every build
+          // autovalidateMode: widget.isValidationEnabled
+          //     ? AutovalidateMode.onUserInteraction
+          //     //? AutovalidateMode.always
+          //     : AutovalidateMode.disabled,
+          validator: widget.validator,
+          decoration: Styles.buildInputDecoration(_errorText, widget.hintText, _label),
+          inputFormatters: widget.inputFormatters,
+          keyboardType: widget.keyboardType,
+          // TODO: investigate when to use it, and expose it.
+          //textInputAction: TextInputAction.done,
+        ),
       ),
     );
   }

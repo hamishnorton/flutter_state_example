@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_example/common/value_objects/text_field_model.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 
 class RiverpodBaseTextField extends ConsumerWidget {
   const RiverpodBaseTextField({
@@ -27,7 +27,7 @@ class RiverpodBaseTextField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     debugPrint('RiverpodBaseTextField.build()');
-    
+
     TextFieldModel fieldModel = ref.watch(watch());
     return Padding(
       padding: const EdgeInsets.all(8.0),
