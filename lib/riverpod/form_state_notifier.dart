@@ -64,4 +64,8 @@ class FormStateNotifier extends StateNotifier<FormModel> {
     _validatePhone(state.phone.value);
     _validatePassword(state.password.value);
   }
+
+  void clear() {
+    state = FormModel.empty();
+  }
 }
