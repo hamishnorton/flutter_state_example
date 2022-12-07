@@ -25,10 +25,12 @@ class RiverpodBaseTextField extends ConsumerStatefulWidget {
   final Function watch;
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _RiverpodBaseStatefulTextFieldState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _RiverpodBaseStatefulTextFieldState();
 }
 
-class _RiverpodBaseStatefulTextFieldState extends ConsumerState<RiverpodBaseTextField> {
+class _RiverpodBaseStatefulTextFieldState
+    extends ConsumerState<RiverpodBaseTextField> {
   late final TextEditingController controller;
 
   @override
@@ -56,7 +58,8 @@ class _RiverpodBaseStatefulTextFieldState extends ConsumerState<RiverpodBaseText
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
-        decoration: Styles.buildInputDecoration(fieldModel.error, widget.hintText, widget.label),
+        decoration: Styles.buildInputDecoration(
+            fieldModel.error, widget.hintText, widget.label),
         controller: controller,
         inputFormatters: widget.inputFormatters,
         obscureText: widget.obscureText,

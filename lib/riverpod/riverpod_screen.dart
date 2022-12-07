@@ -20,28 +20,38 @@ class RiverPodScreen extends StatelessWidget {
                 // option to listen for when the form becomes valid
                 // bool isValid =
                 //     ref.watch(formStateProvider.select((f) => f.isValid ?? false));
-                return ElevatedButton(
-                  onPressed: () {
-                    ref.read(formStateProvider.notifier).validated();
-                    FormModel fm = ref.read(formStateProvider);
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(
+                        onPressed: () {
+                          ref.read(formStateProvider.notifier).clear();
+                        },
+                        child: const Text('Reset')),
+                    ElevatedButton(
+                      onPressed: () {
+                        ref.read(formStateProvider.notifier).validated();
+                        FormModel fm = ref.read(formStateProvider);
 
-                    if (!(fm.isValid ?? false)) return;
+                        if (!(fm.isValid ?? false)) return;
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text('Processing Data'),
-                          Text('Name: ${fm.name.value}'),
-                          Text('Email: ${fm.email.value}'),
-                          Text('Phone: ${fm.phone.value}'),
-                          Text('Password: ${fm.password.value}'),
-                        ],
-                      )),
-                    );
-                  },
-                  child: const Text('Submit'),
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text('Processing Data'),
+                              Text('Name: ${fm.name.value}'),
+                              Text('Email: ${fm.email.value}'),
+                              Text('Phone: ${fm.phone.value}'),
+                              Text('Password: ${fm.password.value}'),
+                            ],
+                          )),
+                        );
+                      },
+                      child: const Text('Submit'),
+                    ),
+                  ],
                 );
               },
             )
