@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 
 /// Don't use this!
 /// Requires setState((){}) to be included in the onChanged callback
@@ -30,26 +30,26 @@ class BaseStatelessTextField extends StatelessWidget {
   final FormFieldValidator? validator;
 
   String? _validate(String? value) {
-    debugPrint('BaseStatelessTextField._validate(value: $value)');
+    // debugPrint('BaseStatelessTextField._validate(value: $value)');
     if (validator == null) return null;
 
     return validator!(value);
   }
 
   String? get _errorText {
-    debugPrint('BaseStatelessTextField._errorText');
+    // debugPrint('BaseStatelessTextField._errorText');
     if (!isValidationEnabled) return null;
-    debugPrint(
-        'BaseTextOCField._errorText validationEnabled: $isValidationEnabled');
+    // debugPrint(
+    //     'BaseTextOCField._errorText validationEnabled: $isValidationEnabled');
     return _validate(initialValue);
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('BaseStatelessTextField.build()');
-    debugPrint('label: $label');
-    debugPrint('validationEnabled: $isValidationEnabled');
-    debugPrint('initialValue: $initialValue');
+    // debugPrint('BaseStatelessTextField.build()');
+    // debugPrint('label: $label');
+    // debugPrint('validationEnabled: $isValidationEnabled');
+    // debugPrint('initialValue: $initialValue');
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -57,8 +57,8 @@ class BaseStatelessTextField extends StatelessWidget {
         key: stateKey,
         initialValue: initialValue,
         onChanged: (text) {
-          debugPrint(
-              'BaseStatelessTextField.TextFormField.onChanged(text: $text)');
+          // debugPrint(
+          //     'BaseStatelessTextField.TextFormField.onChanged(text: $text)');
 
           if (validator == null) {
             onChanged(text); // no validator so assume it valid
@@ -73,8 +73,8 @@ class BaseStatelessTextField extends StatelessWidget {
           }
         },
         validator: (value) {
-          debugPrint(
-              'BaseStatelessTextField.TextFormField.validator(value: $value)');
+          // debugPrint(
+          //     'BaseStatelessTextField.TextFormField.validator(value: $value)');
           return _validate(value);
         },
         autovalidateMode: isValidationEnabled

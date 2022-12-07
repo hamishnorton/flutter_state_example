@@ -9,27 +9,24 @@ A very basic flutter app that shows various methods of state management used wit
 - OnChangedFormFields
   - uses only fiels with `initialValue` and `onChanged()`
   - includes: interfield validation
-- [Provider](https://pub.dev/packages/provider) 
+- [Provider](https://pub.dev/packages/provider)
   - includes: activating validation after initial submit
 - [Cubit (bloc)](https://bloclibrary.dev/)
   - includes: activating validation after initial submit
 - [RiverPod](https://riverpod.dev/)
   - includes: activating validation after initial submit
-- todo: [Stacked](https://github.com/FilledStacks/stacked)
-- todo: rxDart
 
 ## Getting Started
 
-`fvm use 3.0.3`
+`fvm use 3.3.8`
 
 `launch.json` has a configuration for each State System.
 
-
 ## ToDo
 
-1. Interfield validation
+1. Inter-field validation
 2. Form validation message
 3. Focus to first field that is invalid after click on button
-4. FormType: Save to app state on submit if form is valid
-5. FormType: Save to app state once field is valid (auto save, no same or submit button)
+4. Form Type: Save to app state on submit if form is valid
+5. Form Type: Save to app state once field is valid (auto save, no same or submit button)
 6. Add unit testing

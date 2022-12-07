@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_example/common/value_objects/text_field_model.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 
-class RiverpodBaseTextField extends ConsumerWidget {
+class RiverpodBaseTextField extends ConsumerStatefulWidget {
   const RiverpodBaseTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     this.inputFormatters,
-    this.keyboardType = TextInputType.text,
     required this.label,
+    required this.keyboardType,
     this.obscureText = false,
     this.onChanged,
     required this.watch,
-  }) : super(key: key);
+  });
 
   final String hintText;
   final List<TextInputFormatter>? inputFormatters;
@@ -25,22 +25,45 @@ class RiverpodBaseTextField extends ConsumerWidget {
   final Function watch;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _RiverpodBaseStatefulTextFieldState();
+}
+
+class _RiverpodBaseStatefulTextFieldState
+    extends ConsumerState<RiverpodBaseTextField> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     debugPrint('RiverpodBaseTextField.build()');
-    
-    TextFieldModel fieldModel = ref.watch(watch());
+
+    TextFieldModel fieldModel = ref.watch(widget.watch());
+    debugPrint('fieldModel.value: ${fieldModel.value}');
+    if (fieldModel.value != controller.text) {
+      controller.text = fieldModel.value ?? '';
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      // Thought:  given this isn't statefule can we use the likes of TextField instead?
-      // Thought: Can't use TextField as it needs a controller
-      // Thought: What if we did use a controller, the watch would update the controller
-      child: TextFormField(
-        decoration:
-            Styles.buildInputDecoration(fieldModel.error, hintText, label),
-        initialValue: fieldModel.value,
-        inputFormatters: inputFormatters,
-        obscureText: obscureText,
-        onChanged: onChanged,
+      child: TextField(
+        decoration: Styles.buildInputDecoration(
+            fieldModel.error, widget.hintText, widget.label),
+        controller: controller,
+        inputFormatters: widget.inputFormatters,
+        obscureText: widget.obscureText,
+        onChanged: widget.onChanged,
       ),
     );
   }

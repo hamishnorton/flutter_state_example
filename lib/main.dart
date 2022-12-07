@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_state_example/cubit/cubit/form_cubit.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart' as provider;
 enum StateSystem { form, onChangedFormFields, cubit, provider, riverPod }
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   const value = String.fromEnvironment('FSE_TYPE');
   debugPrint('FSE_TYPE: $value');
   final lowerTrimmed = value.toLowerCase().trim();
@@ -49,6 +51,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RendererBinding.instance.setSemanticsEnabled(true);
     Widget home;
 
     switch (stateSystem) {

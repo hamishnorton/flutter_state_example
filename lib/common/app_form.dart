@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppForm extends StatefulWidget {
-  const AppForm(
-      {Key? key, required this.builder, required this.onSaved, this.validator})
-      : super(key: key);
+  const AppForm({Key? key, required this.builder, required this.onSaved, this.validator}) : super(key: key);
 
-  final Widget Function(AppFormState state)
-      builder; // TODO: why is this a builder? Comment
-  final void Function(AppFormState state)
-      onSaved; // TODO: check if state is needed
+  final Widget Function(AppFormState state) builder;
+  final void Function(AppFormState state) onSaved;
 
   // Note: Allows null to be similar to Field Validators
   final String? Function()? validator;
@@ -27,13 +23,11 @@ class AppFormState extends State<AppForm> {
   }
 
   bool get isValid {
-    final bool areFieldsValid = (_formKey.currentState != null)
-        ? _formKey.currentState!.validate()
-        : true;
+    final bool areFieldsValid = (_formKey.currentState != null) ? _formKey.currentState!.validate() : false;
 
-    final bool isFormValid =
-        (widget.validator != null) ? (widget.validator!() ?? '').isEmpty : true;
-    return (areFieldsValid && isFormValid);
+    // final bool isFormValid = (widget.validator != null) ? (widget.validator!() ?? '').isEmpty : true;
+    //return (areFieldsValid && isFormValid);
+    return areFieldsValid;
   }
 
   String get errorText {
@@ -44,12 +38,13 @@ class AppFormState extends State<AppForm> {
 
   bool submit() {
     debugPrint('AppFormState.submit()');
-    setState(() {
-      _submitted = true;
-      if (isValid) {
-        widget.onSaved(this);
-      }
-    });
+    setState(() {});
+    _submitted = true;
+    if (isValid) {
+      debugPrint('if (isValid): true');
+      widget.onSaved(this);
+    }
+    //});
 
     return isValid;
   }

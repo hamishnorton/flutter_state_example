@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_state_example/common/value_objects/text_field_model.dart';
-import 'package:flutter_state_example/theme/theme.dart';
+import 'package:flutter_state_example/theme/styles.dart';
 // for FilteringTextInputFormatter
 
 class ProviderBaseTextField extends StatelessWidget {
